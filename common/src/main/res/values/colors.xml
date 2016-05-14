@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Pink colors-->
+    <color name="Pink" type="color">#FFFFC0CB</color>
+    <color name="LightPink" type="color">#FFFFB6C1</color>
+    <color name="HotPink" type="color">#FFFF69B4</color>
+    <color name="DeepPink" type="color">#FFFF1493</color>
+    <color name="PaleVioletRed" type="color">#FFDB7093</color>
+    <color name="MediumVioletRed" type="color">#FFC71585</color>
+
+    <!-- Red colors-->
+    <color name="LightSalmon" type="color">#FFFFA07A</color>
+    <color name="Salmon" type="color">#FFFA8072</color>
+    <color name="DarkSalmon" type="color">#FFE9967A</color>
+    <color name="LightCoral" type="color">#FFF08080</color>
+    <color name="IndianRed" type="color">#FFCD5C5C</color>
+    <color name="Crimson" type="color">#FFDC143C</color>
+    <color name="FireBrick" type="color">#FFB22222</color>
+    <color name="DarkRed" type="color">#FF8B0000</color>
+    <color name="Red" type="color">#FFFF0000</color>
+
+    <!-- Orange colors-->
+    <color name="OrangeRed" type="color">#FFFF4500</color>
+    <color name="Tomato" type="color">#FFFF6347</color>
+    <color name="Coral" type="color">#FFFF7F50</color>
+    <color name="DarkOrange" type="color">#FFFF8C00</color>
+    <color name="Orange" type="color">#FFFFA500</color>
+
+    <!-- Yellow colors-->
+    <color name="Yellow" type="color">#FFFFFF00</color>
+    <color name="LightYellow" type="color">#FFFFFFE0</color>
+    <color name="LemonChiffon" type="color">#FFFFFACD</color>
+    <color name="LightGoldenrodYellow" type="color">#FFFAFAD2</color>
+    <color name="PapayaWhip" type="color">#FFFFEFD5</color>
+    <color name="Moccasin" type="color">#FFFFE4B5</color>
+    <color name="PeachPuff" type="color">#FFFFDAB9</color>
+    <color name="PaleGoldenrod" type="color">#FFEEE8AA</color>
+    <color name="Khaki" type="color">#FFF0E68C</color>
+    <color name="DarkKhaki" type="color">#FFBDB76B</color>
+    <color name="Gold" type="color">#FFFFD700</color>
+
+    <!-- Brown colors-->
+    <color name="Cornsilk" type="color">#FFFFF8DC</color>
+    <color name="BlanchedAlmond" type="color">#FFFFEBCD</color>
+    <color name="Bisque" type="color">#FFFFE4C4</color>
+    <color name="NavajoWhite" type="color">#FFFFDEAD</color>
+    <color name="Wheat" type="color">#FFF5DEB3</color>
+    <color name="BurlyWood" type="color">#FFDEB887</color>
+    <color name="Tan" type="color">#FFD2B48C</color>
+    <color name="RosyBrown" type="color">#FFBC8F8F</color>
+    <color name="SandyBrown" type="color">#FFF4A460</color>
+    <color name="Goldenrod" type="color">#FFDAA520</color>
+    <color name="DarkGoldenrod" type="color">#FFB8860B</color>
+    <color name="Peru" type="color">#FFCD853F</color>
+    <color name="Chocolate" type="color">#FFD2691E</color>
+    <color name="SaddleBrown" type="color">#FF8B4513</color>
+    <color name="Sienna" type="color">#FFA0522D</color>
+    <color name="Brown" type="color">#FFA52A2A</color>
+    <color name="Maroon" type="color">#FF800000</color>
+
+    <!-- Green colors-->
+    <color name="DarkOliveGreen" type="color">#FF556B2F</color>
+    <color name="Olive" type="color">#FF808000</color>
+    <color name="OliveDrab" type="color">#FF6B8E23</color>
+    <color name="YellowGreen" type="color">#FF9ACD32</color>
+    <color name="LimeGreen" type="color">#FF32CD32</color>
+    <color name="Lime" type="color">#FF00FF00</color>
+    <color name="LawnGreen" type="color">#FF7CFC00</color>
+    <color name="Chartreuse" type="color">#FF7FFF00</color>
+    <color name="GreenYellow" type="color">#FFADFF2F</color>
+    <color name="SpringGreen" type="color">#FF00FF7F</color>
+    <color name="MediumSpringGreen" type="color">#FF00FA9A</color>
+    <color name="LightGreen" type="color">#FF90EE90</color>
+    <color name="PaleGreen" type="color">#FF98FB98</color>
+    <color name="DarkSeaGreen" type="color">#FF8FBC8F</color>
+    <color name="MediumAquamarine" type="color">#FF66CDAA</color>
+    <color name="MediumSeaGreen" type="color">#FF3CB371</color>
+    <color name="SeaGreen" type="color">#FF2E8B57</color>
+    <color name="ForestGreen" type="color">#FF228B22</color>
+    <color name="Green" type="color">#FF008000</color>
+    <color name="DarkGreen" type="color">#FF006400</color>
+
+    <!-- Cyan colors-->
+    <color name="Aqua" type="color">#FF00FFFF</color>
+    <color name="Cyan" type="color">#FF00FFFF</color>
+    <color name="LightCyan" type="color">#FFE0FFFF</color>
+    <color name="PaleTurquoise" type="color">#FFAFEEEE</color>
+    <color name="Aquamarine" type="color">#FF7FFFD4</color>
+    <color name="Turquoise" type="color">#FF40E0D0</color>
+    <color name="MediumTurquoise" type="color">#FF48D1CC</color>
+    <color name="DarkTurquoise" type="color">#FF00CED1</color>
+    <color name="LightSeaGreen" type="color">#FF20B2AA</color>
+    <color name="CadetBlue" type="color">#FF5F9EA0</color>
+    <color name="DarkCyan" type="color">#FF008B8B</color>
+    <color name="Teal" type="color">#FF008080</color>
+
+    <!-- Blue colors-->
+    <color name="LightSteelBlue" type="color">#FFB0C4DE</color>
+    <color name="PowderBlue" type="color">#FFB0E0E6</color>
+    <color name="LightBlue" type="color">#FFADD8E6</color>
+    <color name="SkyBlue" type="color">#FF87CEEB</color>
+    <color name="LightSkyBlue" type="color">#FF87CEFA</color>
+    <color name="DeepSkyBlue" type="color">#FF00BFFF</color>
+    <color name="DodgerBlue" type="color">#FF1E90FF</color>
+    <color name="CornflowerBlue" type="color">#FF6495ED</color>
+    <color name="SteelBlue" type="color">#FF4682B4</color>
+    <color name="RoyalBlue" type="color">#FF4169E1</color>
+    <color name="Blue" type="color">#FF0000FF</color>
+    <color name="MediumBlue" type="color">#FF0000CD</color>
+    <color name="DarkBlue" type="color">#FF00008B</color>
+    <color name="Navy" type="color">#FF000080</color>
+    <color name="MidnightBlue" type="color">#FF191970</color>
+
+    <!-- Purple/Violet/Magenta colors-->
+    <color name="Lavender" type="color">#FFE6E6FA</color>
+    <color name="Thistle" type="color">#FFD8BFD8</color>
+    <color name="Plum" type="color">#FFDDA0DD</color>
+    <color name="Violet" type="color">#FFEE82EE</color>
+    <color name="Orchid" type="color">#FFDA70D6</color>
+    <color name="Fuchsia" type="color">#FFFF00FF</color>
+    <color name="Magenta" type="color">#FFFF00FF</color>
+    <color name="MediumOrchid" type="color">#FFBA55D3</color>
+    <color name="MediumPurple" type="color">#FF9370DB</color>
+    <color name="BlueViolet" type="color">#FF8A2BE2</color>
+    <color name="DarkViolet" type="color">#FF9400D3</color>
+    <color name="DarkOrchid" type="color">#FF9932CC</color>
+    <color name="DarkMagenta" type="color">#FF8B008B</color>
+    <color name="Purple" type="color">#FF800080</color>
+    <color name="Indigo" type="color">#FF4B0082</color>
+    <color name="DarkSlateBlue" type="color">#FF483D8B</color>
+    <color name="SlateBlue" type="color">#FF6A5ACD</color>
+    <color name="MediumSlateBlue" type="color">#FF7B68EE</color>
+
+    <!-- White colors-->
+    <color name="White" type="color">#FFFFFFFF</color>
+    <color name="Snow" type="color">#FFFFFAFA</color>
+    <color name="Honeydew" type="color">#FFF0FFF0</color>
+    <color name="MintCream" type="color">#FFF5FFFA</color>
+    <color name="Azure" type="color">#FFF0FFFF</color>
+    <color name="AliceBlue" type="color">#FFF0F8FF</color>
+    <color name="GhostWhite" type="color">#FFF8F8FF</color>
+    <color name="WhiteSmoke" type="color">#FFF5F5F5</color>
+    <color name="Seashell" type="color">#FFFFF5EE</color>
+    <color name="Beige" type="color">#FFF5F5DC</color>
+    <color name="OldLace" type="color">#FFFDF5E6</color>
+    <color name="FloralWhite" type="color">#FFFFFAF0</color>
+    <color name="Ivory" type="color">#FFFFFFF0</color>
+    <color name="AntiqueWhite" type="color">#FFFAEBD7</color>
+    <color name="Linen" type="color">#FFFAF0E6</color>
+    <color name="LavenderBlush" type="color">#FFFFF0F5</color>
+    <color name="MistyRose" type="color">#FFFFE4E1</color>
+
+    <!-- Gray/Black colors-->
+    <color name="Gainsboro" type="color">#FFDCDCDC</color>
+    <color name="LightGrey" type="color">#FFD3D3D3</color>
+    <color name="Silver" type="color">#FFC0C0C0</color>
+    <color name="DarkGray" type="color">#FFA9A9A9</color>
+    <color name="Gray" type="color">#FF808080</color>
+    <color name="DimGray" type="color">#FF696969</color>
+    <color name="LightSlateGray" type="color">#FF778899</color>
+    <color name="SlateGray" type="color">#FF708090</color>
+    <color name="DarkSlateGray" type="color">#FF2F4F4F</color>
+    <color name="Black" type="color">#FF000000</color>
+    <color name="Black15PercentColor">#202020</color>
+    <color name="Black25PercentColor">#404040</color>
+    <color name="Black50PercentColor">#808080</color>
+    <color name="Black75PercentColor">#c0c0c0</color>
+
+
+    <!-- Black Transparent -->
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black_percent_5">#0D000000</color>
+    <color name="transparent_black_percent_10">#1A000000</color>
+    <color name="transparent_black_percent_15">#26000000</color>
+    <color name="transparent_black_percent_20">#33000000</color>
+    <color name="transparent_black_percent_25">#40000000</color>
+    <color name="transparent_black_percent_30">#4D000000</color>
+    <color name="transparent_black_percent_35">#59000000</color>
+    <color name="transparent_black_percent_40">#66000000</color>
+    <color name="transparent_black_percent_45">#73000000</color>
+    <color name="transparent_black_percent_50">#80000000</color>
+    <color name="transparent_black_percent_55">#8C000000</color>
+    <color name="transparent_black_percent_60">#99000000</color>
+    <color name="transparent_black_percent_65">#A6000000</color>
+    <color name="transparent_black_percent_70">#B3000000</color>
+    <color name="transparent_black_percent_75">#BF000000</color>
+    <color name="transparent_black_percent_80">#CC000000</color>
+    <color name="transparent_black_percent_85">#D9000000</color>
+    <color name="transparent_black_percent_90">#E6000000</color>
+    <color name="transparent_black_percent_95">#F2000000</color>
+
+    <!-- White Transparent -->
+    <color name="transparent_white_percent_5">#0Dffffff</color>
+    <color name="transparent_white_percent_10">#1Affffff</color>
+    <color name="transparent_white_percent_15">#26ffffff</color>
+    <color name="transparent_white_percent_20">#33ffffff</color>
+    <color name="transparent_white_percent_25">#40ffffff</color>
+    <color name="transparent_white_percent_30">#4Dffffff</color>
+    <color name="transparent_white_percent_35">#59ffffff</color>
+    <color name="transparent_white_percent_40">#66ffffff</color>
+    <color name="transparent_white_percent_45">#73ffffff</color>
+    <color name="transparent_white_percent_50">#80ffffff</color>
+    <color name="transparent_white_percent_55">#8Cffffff</color>
+    <color name="transparent_white_percent_60">#99ffffff</color>
+    <color name="transparent_white_percent_65">#A6ffffff</color>
+    <color name="transparent_white_percent_70">#B3ffffff</color>
+    <color name="transparent_white_percent_75">#BFffffff</color>
+    <color name="transparent_white_percent_80">#CCffffff</color>
+    <color name="transparent_white_percent_85">#D9ffffff</color>
+    <color name="transparent_white_percent_90">#E6ffffff</color>
+    <color name="transparent_white_percent_95">#F2ffffff</color>
+</resources>
