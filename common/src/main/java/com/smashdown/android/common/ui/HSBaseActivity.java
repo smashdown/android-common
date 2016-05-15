@@ -2,7 +2,6 @@ package com.smashdown.android.common.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -20,6 +19,7 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.ButterKnife;
 import icepick.Icepick;
 import icepick.State;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class HSBaseActivity extends AppCompatActivity {
     protected MaterialDialog mProgressDialog;
@@ -84,10 +84,10 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     private void initProgressDialog() {
         mProgressDialog = new MaterialDialog.Builder(this)
-            .content("Loading...")
-            .progress(true, 0)
-            .cancelable(false)
-            .build();
+                .content("Loading...")
+                .progress(true, 0)
+                .cancelable(false)
+                .build();
     }
 
     protected void setContentView(int layoutID, Activity target) {
@@ -134,5 +134,10 @@ public abstract class HSBaseActivity extends AppCompatActivity {
     public void onEvent(HSEventNetworkDisconnected event) {
         LogUtils.e("onEvent - HSEventNetworkDisconnected activity=" + getClass().getSimpleName());
         onNetworkDisconnected();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

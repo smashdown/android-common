@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.apkfuns.logutils.LogUtils;
+import com.smashdown.android.common.R;
 import com.smashdown.android.common.event.HSEventAppGoToBackground;
 import com.smashdown.android.common.event.HSEventAppGoToForeground;
 import com.smashdown.android.common.util.Foreground;
@@ -11,6 +12,8 @@ import com.smashdown.android.common.util.Foreground;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.greenrobot.eventbus.EventBus;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public abstract class HSApp extends Application {
     public static final String LOG_TAG = HSApp.class.getSimpleName();
@@ -29,6 +32,12 @@ public abstract class HSApp extends Application {
         // Check app going to background
         Foreground.init(this);
         Foreground.get(this).addListener(mBackgroundListener);
+
+        // Setting font library
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/RobotoTTF/Roboto-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
     }
 
     @Override
