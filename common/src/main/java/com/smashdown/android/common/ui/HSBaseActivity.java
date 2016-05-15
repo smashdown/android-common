@@ -19,7 +19,6 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.ButterKnife;
 import icepick.Icepick;
 import icepick.State;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class HSBaseActivity extends AppCompatActivity {
     protected MaterialDialog mProgressDialog;
@@ -134,10 +133,5 @@ public abstract class HSBaseActivity extends AppCompatActivity {
     public void onEvent(HSEventNetworkDisconnected event) {
         LogUtils.e("onEvent - HSEventNetworkDisconnected activity=" + getClass().getSimpleName());
         onNetworkDisconnected();
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
