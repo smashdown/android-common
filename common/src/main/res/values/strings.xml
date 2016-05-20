@@ -1,17 +1,3 @@
 <resources>
     <string name="app_name">Common</string>
-
-    <string name="hs_save">저장</string>
-    <string name="hs_ok">확인</string>
-    <string name="hs_cancel">취소</string>
-    <string name="hs_yes">예</string>
-    <string name="hs_no">아니오</string>
-    <string name="hs_next">다음</string>
-    <string name="hs_prev">이전</string>
-    <string name="hs_am">오전</string>
-    <string name="hs_pm">오후</string>
-    <string name="hs_add">추가</string>
-    <string name="hs_remove">삭제</string>
-    <string name="hs_hour">시간</string>
-    <string name="hs_date">날짜</string>
 </resources>

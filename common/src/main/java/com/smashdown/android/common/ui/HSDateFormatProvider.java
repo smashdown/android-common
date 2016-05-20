@@ -1,4 +1,4 @@
-package com.smashdown.android.common.app;
+package com.smashdown.android.common.ui;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import org.joda.time.format.DateTimeFormatter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public abstract class HSBasicDateFormat {
+public class HSDateFormatProvider {
 
     public static SimpleDateFormat simpleDateFormat    = new SimpleDateFormat("yyyy-MM-dd");
     public static SimpleDateFormat storeIdleTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
@@ -15,6 +15,7 @@ public abstract class HSBasicDateFormat {
     public static DateFormat DF_DATE_MEDIUM = DateFormat.getDateInstance(DateFormat.MEDIUM);
     public static DateFormat DF_DATE_SHORT  = DateFormat.getDateInstance(DateFormat.SHORT);
     public static DateFormat DF_DATE_LONG   = DateFormat.getDateInstance(DateFormat.LONG);
+    ;
 
     public static DateFormat DF_TIME_SHORT_01  = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
     public static DateFormat DF_TIME_SHORT_02  = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
@@ -38,4 +39,5 @@ public abstract class HSBasicDateFormat {
     public static DateTimeFormatter DTF_DATE_TIME_FULL   = DateTimeFormat.fullDateTime();
     public static DateTimeFormatter DTF_DATE_TIME_MEDIUM = DateTimeFormat.mediumDateTime();
     public static DateTimeFormatter DTF_DATE_TIME_SHORT  = DateTimeFormat.shortDateTime();
+
 }
