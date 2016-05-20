@@ -104,10 +104,12 @@ public abstract class HSBaseActivity extends AppCompatActivity {
     }
 
     public void showProgressDialog(String message) {
-        mProgressDialog.dismiss();
-        if (!TextUtils.isEmpty(message))
-            mProgressDialog.setContent(message);
-        mProgressDialog.show();
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            if (!TextUtils.isEmpty(message))
+                mProgressDialog.setContent(message);
+            mProgressDialog.show();
+        }
     }
 
     public void hideProgressDialog() {

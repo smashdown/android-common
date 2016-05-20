@@ -1,4 +1,4 @@
-package com.smashdown.android.common.ui;
+package com.smashdown.android.common.util;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
