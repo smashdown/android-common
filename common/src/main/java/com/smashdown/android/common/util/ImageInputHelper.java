@@ -118,14 +118,12 @@ public class ImageInputHelper {
     public void takePhotoWithCamera() {
         checkListener();
 
-        if (tempFileFromSource == null) {
-            try {
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                tempFileFromSource = File.createTempFile("choose_" + timeStamp, "png", mContext.getExternalCacheDir());
-                tempUriFromSource = Uri.fromFile(tempFileFromSource);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            tempFileFromSource = File.createTempFile("choose_" + timeStamp, ".png", mContext.getExternalCacheDir());
+            tempUriFromSource = Uri.fromFile(tempFileFromSource);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
