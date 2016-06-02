@@ -9,6 +9,8 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ImageInputHelper {
 
@@ -118,7 +120,8 @@ public class ImageInputHelper {
 
         if (tempFileFromSource == null) {
             try {
-                tempFileFromSource = File.createTempFile("choose", "png", mContext.getExternalCacheDir());
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                tempFileFromSource = File.createTempFile("choose_" + timeStamp, "png", mContext.getExternalCacheDir());
                 tempUriFromSource = Uri.fromFile(tempFileFromSource);
             } catch (IOException e) {
                 e.printStackTrace();

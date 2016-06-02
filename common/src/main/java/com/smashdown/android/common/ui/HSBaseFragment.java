@@ -84,9 +84,9 @@ public abstract class HSBaseFragment extends Fragment {
      */
     protected abstract boolean setupUI();
 
-    protected abstract boolean updateData();
+    public abstract boolean updateData();
 
-    protected abstract boolean updateUI();
+    public abstract boolean updateUI();
 
     // if this fragment used in viewPager it will be used for the tab strip.
     public abstract String getTitle();

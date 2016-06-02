@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="common_text_color">#808080</color>
+    <color name="common_list_background">#e3e3e3</color>
 
     <!-- Pink colors-->
     <color name="Pink" type="color">#FFFFC0CB</color>
