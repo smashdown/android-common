@@ -77,9 +77,11 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 updateData();
             } else {
-                mLoadingLayout.setVisibility(View.GONE);
-                mEmptyLayout.setVisibility(View.VISIBLE);
-                mViewPager.setVisibility(View.GONE);
+                AndroidUtils.toast(this, R.string.hs_permission_rationale_external_storage);
+                finish();
+//                mLoadingLayout.setVisibility(View.GONE);
+//                mEmptyLayout.setVisibility(View.VISIBLE);
+//                mViewPager.setVisibility(View.GONE);
             }
         }
     }
