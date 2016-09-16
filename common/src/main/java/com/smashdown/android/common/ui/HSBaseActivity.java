@@ -41,7 +41,7 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     protected abstract boolean useDefaultTransitionAnimation();
 
-    protected abstract String getTag();
+    public abstract String getTag();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,31 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5164321-0677-4945-84d9-51cb99e362d9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/butterknife_annotations_8_4_0.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/butterknife_7_0_1.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_0_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/butterknife_8_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/cardview_v7_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/build.gradle" afterPath="$PROJECT_DIR$/common/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/common.iml" afterPath="$PROJECT_DIR$/common/common.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/proguard-rules.pro" afterPath="$PROJECT_DIR$/common/proguard-rules.pro" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/app/HSApp.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/app/HSApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/FrgImagePickerFolderList.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/FrgImagePickerFolderList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/FrgImagePickerImageList.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/FrgImagePickerImageList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/util/MediaStoreImageUtil.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/util/MediaStoreImageUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/receiver/NetworkReceiver.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/receiver/NetworkReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSRecyclerView.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSRecyclerView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/util/AndroidUtils.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/util/AndroidUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/res/layout/frg_image_picker_image_list.xml" afterPath="$PROJECT_DIR$/common/src/main/res/layout/frg_image_picker_image_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/build.gradle" afterPath="$PROJECT_DIR$/demo/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/demo.iml" afterPath="$PROJECT_DIR$/demo/demo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/src/main/java/com/hechikasoft/common/demo/DemoApp.java" afterPath="$PROJECT_DIR$/demo/src/main/java/com/hechikasoft/common/demo/DemoApp.java" />
     </list>
     <ignored path="android-common.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,12 +62,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.546875">
-              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+            <state vertical-scroll-proportion="-8.333333">
+              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HSBaseActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,23 +115,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HSImagePickerActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HSImagePickerActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="279" column="8" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.6567164">
+              <caret line="282" column="66" selection-start-line="282" selection-start-column="66" selection-end-line="282" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2986#3035#0" expanded="true" />
                 <element signature="e#4433#4486#0" expanded="true" />
                 <element signature="e#6005#6029#0" expanded="true" />
                 <element signature="e#6641#6674#0" expanded="true" />
-                <element signature="e#9454#9455#0" expanded="true" />
-                <element signature="e#9481#9482#0" expanded="true" />
-                <element signature="e#11484#11533#0" expanded="true" />
-                <element signature="e#11661#12063#0" expanded="true" />
-                <element signature="e#12062#12063#0" expanded="true" />
-                <element signature="e#12927#12951#0" expanded="true" />
+                <element signature="e#9451#9452#0" expanded="true" />
+                <element signature="e#9478#9479#0" expanded="true" />
+                <element signature="e#11481#11530#0" expanded="true" />
+                <element signature="e#11658#12060#0" expanded="true" />
+                <element signature="e#12059#12060#0" expanded="true" />
+                <element signature="e#12924#12948#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,16 +176,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HSApp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/app/HSApp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2494,7 +2477,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5895598978000" />
+        <entry key="$PROJECT_DIR$" value="5895599672000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2945,17 +2928,17 @@
         <option value="$PROJECT_DIR$/common/src/main/res/layout/frg_image_picker_folder_list.xml" />
         <option value="$PROJECT_DIR$/common/src/main/res/layout/frg_image_picker_image_list.xml" />
         <option value="$PROJECT_DIR$/common/proguard-rules.pro" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/app/HSApp.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/FrgImagePickerFolderList.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/FrgImagePickerImageList.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/util/MediaStoreImageUtil.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/receiver/NetworkReceiver.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSRecyclerView.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/util/AndroidUtils.java" />
         <option value="$PROJECT_DIR$/demo/src/main/java/com/hechikasoft/common/demo/DemoApp.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java" />
         <option value="$PROJECT_DIR$/common/build.gradle" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java" />
       </list>
     </option>
   </component>
@@ -3218,11 +3201,11 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.40307972" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.4003623" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32943678" sideWeight="0.5969203" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32943678" sideWeight="0.5996377" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.4963768" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993445" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -3530,16 +3513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/app/HSApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3571,26 +3544,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6235#6273#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="279" column="8" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2986#3035#0" expanded="true" />
-            <element signature="e#4433#4486#0" expanded="true" />
-            <element signature="e#6005#6029#0" expanded="true" />
-            <element signature="e#6641#6674#0" expanded="true" />
-            <element signature="e#9454#9455#0" expanded="true" />
-            <element signature="e#9481#9482#0" expanded="true" />
-            <element signature="e#11484#11533#0" expanded="true" />
-            <element signature="e#11661#12063#0" expanded="true" />
-            <element signature="e#12062#12063#0" expanded="true" />
-            <element signature="e#12927#12951#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3647,11 +3600,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/ui/HSBaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/common/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.546875">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+        <state vertical-scroll-proportion="-8.333333">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/smashdown/android/common/imagepicker/HSImagePickerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6567164">
+          <caret line="282" column="66" selection-start-line="282" selection-start-column="66" selection-end-line="282" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2986#3035#0" expanded="true" />
+            <element signature="e#4433#4486#0" expanded="true" />
+            <element signature="e#6005#6029#0" expanded="true" />
+            <element signature="e#6641#6674#0" expanded="true" />
+            <element signature="e#9451#9452#0" expanded="true" />
+            <element signature="e#9478#9479#0" expanded="true" />
+            <element signature="e#11481#11530#0" expanded="true" />
+            <element signature="e#11658#12060#0" expanded="true" />
+            <element signature="e#12059#12060#0" expanded="true" />
+            <element signature="e#12924#12948#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

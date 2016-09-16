@@ -276,7 +276,7 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
     }
 
     @Override
-    protected String getTag() {
+    public String getTag() {
         return null;
     }
 
