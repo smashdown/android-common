@@ -76,10 +76,15 @@ public class HSRecyclerView extends FrameLayout {
     private void setupView(View view) {
         mSrlList = (SwipeRefreshLayout) view.findViewById(R.id.mSrlList);
         mRvList = (RecyclerView) view.findViewById(R.id.mRvList);
-        mViewEmpty = (View) view.findViewById(R.id.mViewEmpty);
+
+        mViewEmpty = view.findViewById(R.id.mViewEmpty);
+        mIvEmptyLogo = (ImageView) view.findViewById(R.id.mIvEmptyLogo);
         mTvEmpty = (TextView) view.findViewById(R.id.mTvEmpty);
-        mViewLoading = (View) view.findViewById(R.id.mViewLoading);
-        mViewFailed = (View) view.findViewById(R.id.mViewFailed);
+
+        mViewLoading = view.findViewById(R.id.mViewLoading);
+
+        mViewFailed = view.findViewById(R.id.mViewFailed);
+        mIvFailed = (ImageView) view.findViewById(R.id.mIvFailed);
         mTvFailed = (TextView) view.findViewById(R.id.mTvFailed);
     }
 
