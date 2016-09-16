@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v4.app.ShareCompat;
@@ -17,8 +18,15 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.apkfuns.logutils.LogUtils;
+import com.smashdown.android.common.R;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class AndroidUtils {
 
@@ -117,14 +125,7 @@ public class AndroidUtils {
     public static void showKeyboard(Activity activity) {
         if (activity != null) {
             activity.getWindow()
-                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        if (activity != null) {
-            activity.getWindow()
-                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 
@@ -179,5 +180,59 @@ public class AndroidUtils {
         } catch (android.content.ActivityNotFoundException anfe) {
             activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
+    }
+
+
+    public static String loadAssetText(Context context, String assetFileName) {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open(assetFileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            LogUtils.e(ex);
+            return null;
+        }
+        return json;
+    }
+
+    public static String getContentType(Context context, Uri uri) {
+        return context.getContentResolver().getType(uri);
+    }
+
+    public static void hideKeyboard(Activity context) {
+        View view = context.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static String getMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        LogUtils.d("getMimeType() - url=" + url + ", extension=" + extension);
+
+        if (!TextUtils.isEmpty(extension)) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+            if (type == null) {
+                return "image/" + extension;
+            } else {
+                return type;
+            }
+        } else {
+            return "image/*";
+        }
+    }
+
+    public static int getToolbarHeight(Context context) {
+        final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.actionBarSize});
+        int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
+
+        return toolbarHeight;
     }
 }

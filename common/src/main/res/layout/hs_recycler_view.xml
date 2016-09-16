@@ -1,0 +1,89 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/mViewEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_list_background"
+        android:paddingTop="-32dip"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/mTvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_margin="32dip"
+            android:textAppearance="@style/AppText.Subhead"/>
+
+        <ImageView
+            android:id="@+id/mIvEmptyLogo"
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:layout_above="@id/mTvEmpty"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:tint="@color/Gray"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mViewLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dip"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/mViewFailed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="-32dip"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/mIvFailed"
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:scaleType="fitXY"
+            android:tint="@color/Gray"
+            app:srcCompat="@drawable/ic_error_outline_white"/>
+
+        <TextView
+            android:id="@+id/mTvFailed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dip"
+            android:gravity="center"
+            android:textAppearance="@style/AppText.Subhead"/>
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/mSrlList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</FrameLayout>
