@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.app.HSPreferences;
 import com.smashdown.android.common.event.HSEventNetworkConnected;
 import com.smashdown.android.common.event.HSEventNetworkDisconnected;
@@ -20,7 +19,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 
         boolean lastConnected = pref.isNetworkConnected();
         boolean currentConnected = NetworkUtil.isConnected(context);
-        LogUtils.d("NetworkChangeReceiver::onReceive()() - oldStatus=" + lastConnected + ", newStatus=" + currentConnected);
+//        LogUtils.d("NetworkChangeReceiver::onReceive()() - oldStatus=" + lastConnected + ", newStatus=" + currentConnected);
 
         if (currentConnected != lastConnected) {
             pref.setNetworkConnected(currentConnected);
@@ -31,7 +30,7 @@ public class NetworkReceiver extends BroadcastReceiver {
                 EventBus.getDefault().post(new HSEventNetworkDisconnected());
             }
         } else {
-            LogUtils.d("NetworkChangeReceiver() - same status, so ignore it");
+//            LogUtils.d("NetworkChangeReceiver() - same status, so ignore it");
         }
     }
 }

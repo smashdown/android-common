@@ -21,7 +21,6 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.R;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
@@ -123,7 +122,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
         if (id == android.R.id.home) {
             onBackPressed();
         } else if (id == R.id.action_done) {
-            LogUtils.i("onEvent() - TFEventImageDone");
             if (mSelectedImageItems.size() < mMinCount) {
                 AndroidUtils.toast(this, String.format(getString(R.string.hs_err_min_image_count_with_value), mMinCount));
             } else {
@@ -277,6 +275,11 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
         return true;
     }
 
+    @Override
+    protected String getTag() {
+        return null;
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Map<Integer, Fragment> mFragments = new HashMap<>();
 
@@ -317,8 +320,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
 
     @Override
     public void onImageFolderSelected(int pos) {
-        LogUtils.d("onImageFolderSelected - pos=" + pos);
-
         mSelectedFolderIdx = pos;
 
         int curPos = mViewPager.getCurrentItem();
@@ -339,8 +340,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
     }
 
     private boolean mayRequestExternalStorage() {
-        LogUtils.d("mayRequestExternalStorage()");
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
@@ -372,7 +371,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
 
     @Override
     public void onPageSelected(int position) {
-        LogUtils.d("onPageSelected() - pos=" + position);
         invalidateOptionsMenu();
 
         if (position == 0) {

@@ -1,6 +1,5 @@
 package com.hechikasoft.common.demo;
 
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.app.HSApp;
 
 /**
@@ -12,8 +11,5 @@ public class DemoApp extends HSApp {
     public void onCreate() {
         super.onCreate();
 
-        // Logging
-        LogUtils.configAllowLog = true;
-        LogUtils.configTagPrefix = "hsapp-demo";
     }
 }

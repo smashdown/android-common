@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
-import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.smashdown.android.common.R;
@@ -112,8 +110,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
 
     @Override
     public boolean updateUI() {
-        LogUtils.d("updateUI()");
-
         mAdapter.notifyDataSetChanged();
 
         return false;
@@ -181,7 +177,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
             int pos = getAdapterPosition();
 
             HSImageItem imageItem = mFolders.get(selectedFolderIndex).images.get(pos);
-            LogUtils.d("onClick - pos=" + pos + ", selectedUri=" + imageItem.data + ", max count=" + mMaxCount + " , current count=" + mSelectedImageItems.size());
 
             if (mSelectedImageItems.contains(imageItem)) {
                 ((HSImagePickerable) getActivity()).onImageUnelected(imageItem);

@@ -14,6 +14,7 @@ import android.support.v4.app.ShareCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,7 +23,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.R;
 
 import java.io.IOException;
@@ -193,7 +193,7 @@ public class AndroidUtils {
             is.close();
             json = new String(buffer, "UTF-8");
         } catch (IOException ex) {
-            LogUtils.e(ex);
+            ex.printStackTrace();
             return null;
         }
         return json;
@@ -214,7 +214,7 @@ public class AndroidUtils {
     public static String getMimeType(String url) {
         String type = null;
         String extension = MimeTypeMap.getFileExtensionFromUrl(url);
-        LogUtils.d("getMimeType() - url=" + url + ", extension=" + extension);
+        Log.d("JJY", "getMimeType() - url=" + url + ", extension=" + extension);
 
         if (!TextUtils.isEmpty(extension)) {
             type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);

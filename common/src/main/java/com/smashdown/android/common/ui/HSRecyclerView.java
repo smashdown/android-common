@@ -9,14 +9,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.R;
 
+import butterknife.BindView;
 import icepick.Icepick;
 import icepick.State;
 
@@ -105,19 +106,19 @@ public class HSRecyclerView extends FrameLayout {
 
                 if (totalItem >= 20 && lastVisibleItem == totalItem - 1) {
                     if (!mEnabledLoadMore) {
-                        LogUtils.d(HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mEnabledLoadMore=" + mEnabledLoadMore);
+                        Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mEnabledLoadMore=" + mEnabledLoadMore);
                         return;
                     }
                     if (!mCanLoadMore) {
-                        LogUtils.d(HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mCanLoadMore=" + mCanLoadMore);
+                        Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mCanLoadMore=" + mCanLoadMore);
                         return;
                     }
                     if (mIsDoanloading) {
-                        LogUtils.d(HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mIsDoanloading=" + mIsDoanloading);
+                        Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mIsDoanloading=" + mIsDoanloading);
                         return;
                     }
                     if (mLoadMoreListener == null) {
-                        LogUtils.d(HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mLoadMoreListener=" + mLoadMoreListener);
+                        Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mLoadMoreListener=" + mLoadMoreListener);
                         return;
                     }
                     mIsDoanloading = true;
@@ -141,14 +142,14 @@ public class HSRecyclerView extends FrameLayout {
 
                 // empty message
                 String emptyMessage = a.getString(R.styleable.HSRecyclerView_emptyString);
-                LogUtils.d(HSRecyclerView.class.getSimpleName() + "::Init() - emptyMessage=" + emptyMessage);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - emptyMessage=" + emptyMessage);
                 if (!TextUtils.isEmpty(emptyMessage)) {
                     mTvEmpty.setText(emptyMessage);
                 }
 
                 // failed message
                 String failedMessage = a.getString(R.styleable.HSRecyclerView_failedString);
-                LogUtils.d(HSRecyclerView.class.getSimpleName() + "::Init() - failedMessage=" + failedMessage);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - failedMessage=" + failedMessage);
                 if (!TextUtils.isEmpty(failedMessage)) {
                     mTvFailed.setText(failedMessage);
                 }
@@ -184,19 +185,19 @@ public class HSRecyclerView extends FrameLayout {
 
                 // enable pull to refresh
                 mEnabledPullToRefresh = a.getBoolean(R.styleable.HSRecyclerView_enablePullToRefresh, false);
-                LogUtils.d(HSRecyclerView.class.getSimpleName() + "::Init() - mEnabledPullToRefresh=" + mEnabledPullToRefresh);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - mEnabledPullToRefresh=" + mEnabledPullToRefresh);
                 mSrlList.setEnabled(mEnabledPullToRefresh);
 
                 // enable load more
                 mEnabledLoadMore = a.getBoolean(R.styleable.HSRecyclerView_enableLoadMore, false);
-                LogUtils.d(HSRecyclerView.class.getSimpleName() + "::Init() - mEnabledLoadMore=" + mEnabledLoadMore);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - mEnabledLoadMore=" + mEnabledLoadMore);
 
                 // enable reverseLayout
                 boolean reverseLayout = a.getBoolean(R.styleable.HSRecyclerView_reverseLayout, false);
-                LogUtils.d(HSRecyclerView.class.getSimpleName() + "::Init() - reverseLayout=" + reverseLayout);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - reverseLayout=" + reverseLayout);
                 mLayoutManager.setReverseLayout(reverseLayout);
             } catch (Exception e) {
-                LogUtils.e(e);
+                e.printStackTrace();
             } finally {
                 a.recycle();
             }
@@ -207,7 +208,7 @@ public class HSRecyclerView extends FrameLayout {
 
     public void setAdapter(RecyclerView.Adapter adapter) {
         if (adapter == null) {
-            LogUtils.e("adapter is null");
+            Log.e("JJY", "adapter is null");
             return;
         }
 
@@ -261,7 +262,7 @@ public class HSRecyclerView extends FrameLayout {
                     }
                 }
 
-                LogUtils.d(HSRecyclerView.class.getSimpleName() + "::setStatus() status=" + status.name() + ", currentItemCount=" + currentItemCount + ", mCanLoadMore=" + mCanLoadMore);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::setStatus() status=" + status.name() + ", currentItemCount=" + currentItemCount + ", mCanLoadMore=" + mCanLoadMore);
                 break;
         }
     }

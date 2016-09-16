@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
 
 import java.util.ArrayList;
@@ -66,7 +65,6 @@ public class MediaStoreImageUtil {
                 image.miniThumbMagic = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.ImageColumns.MINI_THUMB_MAGIC));
                 image.picasaId = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.PICASA_ID));
 
-                LogUtils.d("fetch image - uri=" + image.data);
                 images.add(image);
             } while (cursor.moveToNext());
         }

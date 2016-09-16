@@ -8,9 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.apkfuns.logutils.LogUtils;
 import com.smashdown.android.common.R;
 import com.smashdown.android.common.event.HSEventCloseApp;
 import com.smashdown.android.common.event.HSEventNetworkConnected;
@@ -41,11 +41,11 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     protected abstract boolean useDefaultTransitionAnimation();
 
+    protected abstract String getTag();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        LogUtils.i("onCreate - " + getActivityName());
 
         // init modules
         initProgressDialog();
@@ -125,19 +125,19 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(HSEventCloseApp event) {
-        LogUtils.e("onEvent - HSEventCloseApp activity=" + getClass().getSimpleName());
+        Log.e("JJY", "onEvent - HSEventCloseApp activity=" + getClass().getSimpleName());
         super.finish();
     }
 
     @Subscribe
     public void onEvent(HSEventNetworkConnected event) {
-        LogUtils.e("onEvent - HSEventNetworkConnected activity=" + getClass().getSimpleName());
+        Log.e("JJY", "onEvent - HSEventNetworkConnected activity=" + getClass().getSimpleName());
         onNetworkConnected();
     }
 
     @Subscribe
     public void onEvent(HSEventNetworkDisconnected event) {
-        LogUtils.e("onEvent - HSEventNetworkDisconnected activity=" + getClass().getSimpleName());
+        Log.e("JJY", "onEvent - HSEventNetworkDisconnected activity=" + getClass().getSimpleName());
         onNetworkDisconnected();
     }
 
