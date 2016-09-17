@@ -12,7 +12,6 @@ import com.smashdown.android.common.event.HSEventEmpty;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.ButterKnife;
 import icepick.Icepick;
 import icepick.State;
 
@@ -43,24 +42,6 @@ public abstract class HSBaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         updateData();
-    }
-
-    /**
-     * All the fragments who extends this class, should call this method in onCreateView
-     *
-     * @param inflater
-     * @param container
-     * @param layoutID
-     * @param frg
-     * @return
-     */
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, int layoutID, Fragment frg) {
-        View rootView = inflater.inflate(layoutID, container, false);
-        ButterKnife.bind(frg, rootView);
-
-        setupUI();
-
-        return rootView;
     }
 
     @Override

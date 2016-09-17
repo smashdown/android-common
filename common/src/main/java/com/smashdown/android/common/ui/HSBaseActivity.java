@@ -19,7 +19,6 @@ import com.smashdown.android.common.event.HSEventNetworkDisconnected;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.ButterKnife;
 import icepick.Icepick;
 import icepick.State;
 
@@ -46,6 +45,9 @@ public abstract class HSBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (useDefaultTransitionAnimation())
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
         // init modules
         initProgressDialog();
@@ -90,13 +92,6 @@ public abstract class HSBaseActivity extends AppCompatActivity {
                 .progress(true, 0)
                 .cancelable(false)
                 .build();
-    }
-
-    protected void setContentView(int layoutID, Activity target) {
-        setContentView(layoutID);
-        ButterKnife.bind(target);
-        if (useDefaultTransitionAnimation())
-            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 
     public String getActivityName() {

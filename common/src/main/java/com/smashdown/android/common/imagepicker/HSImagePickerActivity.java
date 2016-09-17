@@ -142,7 +142,7 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
 
     @Override
     protected boolean setupUI(Bundle bundle) {
-        setContentView(R.layout.image_picker_activity, this);
+        setContentView(R.layout.image_picker_activity);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mLoadingLayout = findViewById(R.id.loading_layout);

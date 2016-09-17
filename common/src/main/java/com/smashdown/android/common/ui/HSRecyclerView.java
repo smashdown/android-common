@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.smashdown.android.common.R;
 
-import butterknife.BindView;
 import icepick.Icepick;
 import icepick.State;
 

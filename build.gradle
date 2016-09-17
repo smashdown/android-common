@@ -11,10 +11,6 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
-        // for butterknife
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-
         // for deploy jitpack
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
     }
