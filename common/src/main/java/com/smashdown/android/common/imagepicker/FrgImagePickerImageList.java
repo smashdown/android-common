@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.smashdown.android.common.R;
+import com.smashdown.android.common.R2;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
 import com.smashdown.android.common.ui.HSBaseFragment;
@@ -21,6 +22,9 @@ import com.smashdown.android.common.util.AndroidUtils;
 
 import java.io.File;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FrgImagePickerImageList extends HSBaseFragment {
     private SuperRecyclerView          mRvImageList;
@@ -58,11 +62,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frg_image_picker_image_list, container, false);
-
-        mRvImageList = (SuperRecyclerView) view.findViewById(R.id.mRvImageList);
-
-        setupUI();
+        View view = setContentView(inflater, container, R.layout.frg_image_picker_image_list, this);
 
         return view;
     }
@@ -159,15 +159,12 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView ivImage;
-        CheckBox  cbCheckBox;
+        @BindView(R2.id.ivImage)    ImageView ivImage;
+        @BindView(R2.id.cbCheckBox) CheckBox  cbCheckBox;
 
         public ItemViewHolder(View v) {
             super(v);
-
-            ivImage = (ImageView) v.findViewById(R.id.ivImage);
-            cbCheckBox = (CheckBox) v.findViewById(R.id.cbCheckBox);
-
+            ButterKnife.bind(this, v);
             v.setOnClickListener(this);
         }
 

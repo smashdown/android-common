@@ -13,11 +13,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.smashdown.android.common.R;
+import com.smashdown.android.common.R2;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.ui.HSBaseFragment;
 
 import java.io.File;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FrgImagePickerFolderList extends HSBaseFragment {
 
@@ -41,10 +45,7 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frg_image_picker_folder_list, container, false);
-        mRvFolderList = (SuperRecyclerView) view.findViewById(R.id.mRvFolderList);
-
-        setupUI();
+        View view = setContentView(inflater, container, R.layout.frg_image_picker_folder_list, this);
 
         return view;
     }
@@ -110,20 +111,16 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        View      root;
-        ImageView ivImage;
-        TextView  tvFolderName;
-        TextView  tvImageCount;
+        @BindView(R2.id.root)         View      root;
+        @BindView(R2.id.ivImage)      ImageView ivImage;
+        @BindView(R2.id.tvFolderName) TextView  tvFolderName;
+        @BindView(R2.id.tvImageCount) TextView  tvImageCount;
 
         public ItemViewHolder(View v) {
             super(v);
 
-            root = v.findViewById(R.id.root);
+            ButterKnife.bind(this, v);
             root.setOnClickListener(this);
-
-            ivImage = (ImageView) v.findViewById(R.id.ivImage);
-            tvFolderName = (TextView) v.findViewById(R.id.tvFolderName);
-            tvImageCount = (TextView) v.findViewById(R.id.tvImageCount);
         }
 
         @Override
