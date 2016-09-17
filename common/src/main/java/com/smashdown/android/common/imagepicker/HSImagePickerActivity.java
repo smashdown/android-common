@@ -22,7 +22,6 @@ import android.view.View;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.R2;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
 import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
@@ -35,8 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class HSImagePickerActivity extends HSBaseActivity implements HSImagePickerable, ViewPager.OnPageChangeListener {
@@ -47,12 +44,12 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
 
     public static final String EXTRA_IMAGE_URIS = "extra_image_uris";
 
-    @BindView(R2.id.toolbar) Toolbar toolbar;
+    Toolbar toolbar;
 
-    @BindView(R2.id.loading_layout) View                 mLoadingLayout;
-    @BindView(R2.id.empty_layout)   View                 mEmptyLayout;
-    @BindView(R2.id.mViewPager)     ViewPager            mViewPager;
-    private                         SectionsPagerAdapter mPagerAdapter;
+    View      mLoadingLayout;
+    View      mEmptyLayout;
+    ViewPager mViewPager;
+    private SectionsPagerAdapter mPagerAdapter;
 
     int mMinCount = 1;
     int mMaxCount = 1;
@@ -146,6 +143,12 @@ public class HSImagePickerActivity extends HSBaseActivity implements HSImagePick
     @Override
     protected boolean setupUI(Bundle bundle) {
         setContentView(R.layout.image_picker_activity, this);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        mLoadingLayout = (View) findViewById(R.id.loading_layout);
+        mEmptyLayout = (View) findViewById(R.id.empty_layout);
+        mViewPager = (ViewPager) findViewById(R.id.mViewPager);
 
         setupActionBar();
 

@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.R2;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
 import com.smashdown.android.common.ui.HSBaseFragment;
@@ -23,7 +22,7 @@ import com.smashdown.android.common.util.AndroidUtils;
 import java.io.File;
 import java.util.List;
 
-import butterknife.BindView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class FrgImagePickerImageList extends HSBaseFragment {
@@ -159,12 +158,13 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R2.id.ivImage)    ImageView ivImage;
-        @BindView(R2.id.cbCheckBox) CheckBox  cbCheckBox;
+        ImageView ivImage;
+        CheckBox  cbCheckBox;
 
         public ItemViewHolder(View v) {
             super(v);
-            ButterKnife.bind(this, v);
+
+            ivImage = (ImageView)v.findViewById(R.id.ivImage);
             v.setOnClickListener(this);
         }
 

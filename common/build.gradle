@@ -1,17 +1,5 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.2.0'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'android-apt'
 
 group = 'com.github.smashdown'
 
@@ -22,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 31
-        versionName "0.3.1"
+        versionCode 32
+        versionName "0.3.2"
 
         // support vector drawable
         vectorDrawables.useSupportLibrary = true
@@ -64,7 +52,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
 
     // ButterKnife
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
 

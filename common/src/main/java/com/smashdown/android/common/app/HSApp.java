@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.smashdown.android.common.BuildConfig;
 import com.smashdown.android.common.event.HSEventAppGoToBackground;
 import com.smashdown.android.common.event.HSEventAppGoToForeground;
 import com.smashdown.android.common.util.Foreground;
@@ -13,6 +14,8 @@ import com.smashdown.android.common.util.Foreground;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.greenrobot.eventbus.EventBus;
+
+import butterknife.ButterKnife;
 
 public abstract class HSApp extends Application implements Application.ActivityLifecycleCallbacks {
     public static final String LOG_TAG = HSApp.class.getSimpleName();
@@ -35,6 +38,8 @@ public abstract class HSApp extends Application implements Application.ActivityL
         Foreground.get(this).addListener(mBackgroundListener);
 
         registerActivityLifecycleCallbacks(this);
+
+        ButterKnife.setDebug(true);
     }
 
     @Override

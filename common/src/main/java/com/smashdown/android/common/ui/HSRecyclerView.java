@@ -16,10 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.R2;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import icepick.Icepick;
 import icepick.State;
 
@@ -32,22 +29,22 @@ public class HSRecyclerView extends FrameLayout {
         void onLoadMore();
     }
 
-    @BindView(R2.id.mSrlList) SwipeRefreshLayout  mSrlList;
-    @BindView(R2.id.mRvList)  RecyclerView        mRvList;
-    private                   LinearLayoutManager mLayoutManager;
+    SwipeRefreshLayout mSrlList;
+    RecyclerView       mRvList;
+    private LinearLayoutManager mLayoutManager;
 
     // Empty View
-    @BindView(R2.id.mViewEmpty)   View      mViewEmpty;
-    @BindView(R2.id.mIvEmptyLogo) ImageView mIvEmptyLogo;
-    @BindView(R2.id.mTvEmpty)     TextView  mTvEmpty;
+    View      mViewEmpty;
+    ImageView mIvEmptyLogo;
+    TextView  mTvEmpty;
 
     // Loading View
-    @BindView(R2.id.mViewLoading) View mViewLoading;
+    View mViewLoading;
 
     // Failed View
-    @BindView(R2.id.mViewFailed) View      mViewFailed;
-    @BindView(R2.id.mIvFailed)   ImageView mIvFailed;
-    @BindView(R2.id.mTvFailed)   TextView  mTvFailed;
+    View      mViewFailed;
+    ImageView mIvFailed;
+    TextView  mTvFailed;
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener;
     private OnLoadMoreListener                   mLoadMoreListener;
@@ -78,7 +75,22 @@ public class HSRecyclerView extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         View view = inflate(getContext(), R.layout.hs_recycler_view, null);
-        ButterKnife.bind(view, this);
+
+        mSrlList = (SwipeRefreshLayout) view.findViewById(R.id.mSrlList);
+        mRvList = (RecyclerView) view.findViewById(R.id.mRvList);
+
+        // Empty View
+        mViewEmpty = view.findViewById(R.id.mViewEmpty);
+        mIvEmptyLogo = (ImageView) view.findViewById(R.id.mIvEmptyLogo);
+        mTvEmpty = (TextView) view.findViewById(R.id.mTvEmpty);
+
+        // Loading View
+        mViewLoading = view.findViewById(R.id.mViewLoading);
+
+        // Failed View
+        mViewFailed = view.findViewById(R.id.mViewFailed);
+        mIvFailed = (ImageView) view.findViewById(R.id.mIvFailed);
+        mTvFailed = (TextView) view.findViewById(R.id.mTvFailed);
 
         mLayoutManager = new LinearLayoutManager(context);
         mRvList.setLayoutManager(mLayoutManager);
