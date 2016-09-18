@@ -29,22 +29,22 @@ public class HSRecyclerView extends FrameLayout {
         void onLoadMore();
     }
 
-    SwipeRefreshLayout mSrlList;
-    RecyclerView       mRvList;
-    private LinearLayoutManager mLayoutManager;
+    protected SwipeRefreshLayout  mSrlList;
+    protected RecyclerView        mRvList;
+    private   LinearLayoutManager mLayoutManager;
 
     // Empty View
-    View      mViewEmpty;
-    ImageView mIvEmptyLogo;
-    TextView  mTvEmpty;
+    protected View      mViewEmpty;
+    protected ImageView mIvEmptyLogo;
+    protected TextView  mTvEmpty;
 
     // Loading View
-    View mViewLoading;
+    protected View mViewLoading;
 
     // Failed View
-    View      mViewFailed;
-    ImageView mIvFailed;
-    TextView  mTvFailed;
+    protected View      mViewFailed;
+    protected ImageView mIvFailed;
+    protected TextView  mTvFailed;
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener;
     private OnLoadMoreListener                   mLoadMoreListener;
@@ -102,7 +102,7 @@ public class HSRecyclerView extends FrameLayout {
                 int totalItem = mLayoutManager.getItemCount();
                 int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
 
-                if (totalItem >= 20 && lastVisibleItem == totalItem - 1) {
+                if (totalItem >= REFRESH_COUNT && lastVisibleItem == totalItem - 1) {
                     if (!mEnabledLoadMore) {
                         Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mEnabledLoadMore=" + mEnabledLoadMore);
                         return;
@@ -221,11 +221,19 @@ public class HSRecyclerView extends FrameLayout {
         switch (status) {
             case LOADING:
                 mIsDoanloading = true;
-                mViewEmpty.setVisibility(View.GONE);
-                mViewFailed.setVisibility(View.GONE);
-                mViewLoading.setVisibility(View.VISIBLE);
-                mSrlList.setVisibility(View.GONE);
-                mRvList.setVisibility(View.GONE);
+                if (mRvList.getAdapter().getItemCount() > 0) {
+                    mViewEmpty.setVisibility(View.GONE);
+                    mViewFailed.setVisibility(View.GONE);
+                    mViewLoading.setVisibility(View.GONE);
+                    mSrlList.setVisibility(View.VISIBLE);
+                    mRvList.setVisibility(View.VISIBLE);
+                } else {
+                    mViewEmpty.setVisibility(View.GONE);
+                    mViewFailed.setVisibility(View.GONE);
+                    mViewLoading.setVisibility(View.VISIBLE);
+                    mSrlList.setVisibility(View.GONE);
+                    mRvList.setVisibility(View.GONE);
+                }
                 break;
             case FAILED:
                 mIsDoanloading = false;
