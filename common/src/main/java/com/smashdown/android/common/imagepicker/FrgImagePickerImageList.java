@@ -1,42 +1,52 @@
 package com.smashdown.android.common.imagepicker;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
+import com.smashdown.android.common.hsrecyclerview.HSRecyclerView;
+import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
+import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
+import com.smashdown.android.common.ui.HSBaseActivity;
 import com.smashdown.android.common.ui.HSBaseFragment;
 import com.smashdown.android.common.util.AndroidUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 public class FrgImagePickerImageList extends HSBaseFragment {
-    private SuperRecyclerView          mRvImageList;
-    private ImageAdapter               mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private HSRecyclerView mRvImageList;
+    private ImageAdapter   mAdapter;
 
     int mMinCount = 1;
     int mMaxCount = 1;
 
     // TODO: onsavestate
 
-    private List<HSImageFolderItem> mFolders;
-    private List<HSImageItem>       mSelectedImageItems;
+    private List<HSImageItem> mImages             = new ArrayList<>();
+    private List<HSImageItem> mSelectedImageItems = new ArrayList<>();
 
     public static FrgImagePickerImageList newInstance(int minCount, int maxCount) {
         FrgImagePickerImageList frg = new FrgImagePickerImageList();
@@ -54,16 +64,49 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFolders = ((HSImagePickerable) getActivity()).getFolderList();
-        mSelectedImageItems = ((HSImagePickerable) getActivity()).getSelectedImageItems();
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_image_picker, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_done) {
+            if (mSelectedImageItems.size() < mMinCount) {
+                AndroidUtils.toast(getActivity(), String.format(getString(R.string.hs_err_min_image_count_with_value), mMinCount));
+            } else {
+                Intent intent = new Intent();
+
+                ArrayList<Uri> result = new ArrayList<>();
+                for (HSImageItem i : mSelectedImageItems) {
+                    result.add(Uri.parse(i.data));
+                }
+                intent.putParcelableArrayListExtra(HSImagePickerActivity.EXTRA_IMAGE_URIS, result);
+
+                getActivity().setResult(Activity.RESULT_OK, intent);
+                getActivity().finish();
+            }
+        }
+        return true;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = setContentView(inflater, container, R.layout.frg_image_picker_image_list, this);
+        View rootView = setContentView(inflater, container, R.layout.frg_image_picker_image_list, this);
 
-        return view;
+        mRvImageList = (HSRecyclerView) rootView.findViewById(R.id.mRvImageList);
+
+        int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 5 : 3;
+        mAdapter = new ImageAdapter();
+        mRvImageList.setAdapter(new GridLayoutManager(getActivity(), spanCount), mAdapter);
+
+        return rootView;
     }
 
     @Override
@@ -77,17 +120,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
 
     @Override
     protected boolean setupUI() {
-        int spanCount = 3;
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            spanCount = 5;
-        }
-
-        mLayoutManager = new GridLayoutManager(getActivity(), spanCount);
-        mRvImageList.setLayoutManager(mLayoutManager);
-
-        mAdapter = new ImageAdapter();
-        mRvImageList.setAdapter(mAdapter);
-
         return true;
     }
 
@@ -96,9 +128,9 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            ((GridLayoutManager) mLayoutManager).setSpanCount(5);
+            ((GridLayoutManager) mRvImageList.getLayoutManager()).setSpanCount(5);
         } else {
-            ((GridLayoutManager) mLayoutManager).setSpanCount(3);
+            ((GridLayoutManager) mRvImageList.getLayoutManager()).setSpanCount(3);
         }
     }
 
@@ -133,27 +165,23 @@ public class FrgImagePickerImageList extends HSBaseFragment {
 
         @Override
         public void onBindViewHolder(ItemViewHolder holder, int position) {
-            int mSelectedFolderIndex = ((HSImagePickerable) getActivity()).getSelectedFolderIndex();
-            if (mSelectedFolderIndex > -1) {
-                Glide.with(getActivity()).load(new File(mFolders.get(mSelectedFolderIndex).images.get(position).data)).centerCrop().into(holder.ivImage);
+            HSImageItem image = mImages.get(position);
 
-                if (mSelectedImageItems.contains(mFolders.get(mSelectedFolderIndex).images.get(position))) {
-                    holder.cbCheckBox.setChecked(true);
-                } else {
-                    holder.cbCheckBox.setChecked(false);
-                }
-                holder.itemView.setTag(R.id.ivImage, holder.cbCheckBox);
+            Glide.with(getActivity()).load(new File(image.data)).centerCrop().into(holder.ivImage);
+
+            if (mSelectedImageItems.contains(image)) {
+                holder.cbCheckBox.setChecked(true);
+            } else {
+                holder.cbCheckBox.setChecked(false);
             }
+
+            holder.itemView.setTag(R.id.ivImage, holder.cbCheckBox);
+            holder.itemView.setTag(R.id.cbCheckBox, image);
         }
 
         @Override
         public int getItemCount() {
-            int mSelectedFolderIndex = ((HSImagePickerable) getActivity()).getSelectedFolderIndex();
-            if (mSelectedFolderIndex > -1) {
-                return mFolders.get(mSelectedFolderIndex).images.size();
-            } else {
-                return 0;
-            }
+            return mImages.size();
         }
     }
 
@@ -164,30 +192,65 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         public ItemViewHolder(View v) {
             super(v);
 
-            ivImage = (ImageView)v.findViewById(R.id.ivImage);
+            ivImage = (ImageView) v.findViewById(R.id.ivImage);
             v.setOnClickListener(this);
+
+            cbCheckBox = (CheckBox) v.findViewById(R.id.cbCheckBox);
         }
 
         @Override
         public void onClick(View view) {
-            int selectedFolderIndex = ((HSImagePickerable) getActivity()).getSelectedFolderIndex();
-            int pos = getAdapterPosition();
+            if (view.getTag(R.id.ivImage) != null) {
+                HSImageItem imageItem = ((HSImageItem) view.getTag(R.id.cbCheckBox));
+                CheckBox checkBox = ((CheckBox) view.getTag(R.id.ivImage));
+                checkBox.toggle();
 
-            HSImageItem imageItem = mFolders.get(selectedFolderIndex).images.get(pos);
-
-            if (mSelectedImageItems.contains(imageItem)) {
-                ((HSImagePickerable) getActivity()).onImageUnelected(imageItem);
-            } else {
-                if (mSelectedImageItems.size() + 1 > mMaxCount) {
-                    AndroidUtils.toast(getActivity(), R.string.hs_err_exceed_max_image_count);
-                    return;
+                if (checkBox.isChecked()) {
+                    if (mSelectedImageItems.size() >= mMaxCount) {
+                        checkBox.toggle();
+                        AndroidUtils.toast(getActivity(), R.string.hs_err_exceed_max_image_count);
+                        return;
+                    }
+                    mSelectedImageItems.add(imageItem);
                 } else {
-                    ((HSImagePickerable) getActivity()).onImageSelected(imageItem);
+                    mSelectedImageItems.remove(imageItem);
                 }
+                updateActionBar(null);
+            }
+        }
+    }
+
+    private void updateActionBar(String title) {
+        if (!TextUtils.isEmpty(title))
+            ((HSBaseActivity) getActivity()).getSupportActionBar().setTitle(title);
+
+        ((HSBaseActivity) getActivity()).getSupportActionBar().setSubtitle(String.format(getString(R.string.hs_image_selected_with_value), mSelectedImageItems.size(), mMaxCount));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(HSEventImageFolderSelected event) {
+        mSelectedImageItems.clear();
+        updateActionBar(event.item.bucketDisplayName);
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected void onPreExecute() {
+                mRvImageList.setStatus(HSRecyclerView.HSRecyclerViewStatus.LOADING, -1);
             }
 
-            if (view.getTag(R.id.ivImage) != null)
-                ((CheckBox) view.getTag(R.id.ivImage)).toggle();
-        }
+            @Override
+            protected String doInBackground(String... params) {
+                mImages.clear();
+                mImages.addAll(MediaStoreImageUtil.getImagesByFolderName(getActivity(), params[0]));
+
+                return "";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                mRvImageList.setStatus(HSRecyclerView.HSRecyclerViewStatus.SUCCEED, mImages.size());
+            }
+        }.execute(event.item.bucketDisplayName);
+
     }
 }

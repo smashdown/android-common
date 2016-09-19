@@ -5,10 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.malinskiy.superrecyclerview.SuperRecyclerView
+    <com.smashdown.android.common.hsrecyclerview.HSRecyclerView
         android:id="@+id/mRvFolderList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_empty="@layout/view_frg_image_picker_folder_empty"
-        app:scrollbarStyle="insideInset"/>
+
+        app:emptyString="No Image Folders"
+        app:emptyLog="@drawable/ic_error_outline_white"
+        app:enableRefreshEmptyView="false"
+
+        app:failedString="No Image Folders"
+        app:failedLogo="@drawable/ic_error_outline_white"
+        app:enableRefreshFailedView="false"
+
+        app:enableLoadMore="false"
+        app:refreshItemCount="9999"
+        app:enablePullToRefresh="false"/>/>
 </RelativeLayout>

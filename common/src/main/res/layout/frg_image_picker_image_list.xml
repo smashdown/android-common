@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.smashdown.android.common.ui.HSRecyclerView
+    <com.smashdown.android.common.hsrecyclerview.HSRecyclerView
         android:id="@+id/mRvImageList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +18,7 @@
         app:failedLogo="@drawable/ic_error_outline_white"
         app:enableRefreshFailedView="true"
 
-        app:refreshItemCount="20"
+        app:refreshItemCount="999999"
         app:enableLoadMore="false"
         app:enablePullToRefresh="false"/>
 </RelativeLayout>

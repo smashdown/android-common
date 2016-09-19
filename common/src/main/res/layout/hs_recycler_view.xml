@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="center"
             android:layout_margin="32dip"
+            android:gravity="center"
             android:textAppearance="@style/AppText.Subhead"/>
 
         <ImageView
@@ -73,17 +73,39 @@
 
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/mSrlList"
+    <LinearLayout
+        android:id="@+id/mLlRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mRvList"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/mSrlList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="0dip"
+            android:layout_weight="1.0">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mRvList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/mLlLoadingInside"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="8dip"
+            android:paddingTop="8dip">
+            <!--style="?android:attr/progressBarStyleSmall"-->
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"/>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </FrameLayout>

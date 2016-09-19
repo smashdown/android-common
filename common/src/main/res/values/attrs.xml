@@ -18,13 +18,15 @@
     <declare-styleable name="HSRecyclerView">
         <attr name="enablePullToRefresh" format="boolean"/>
         <attr name="enableLoadMore" format="boolean"/>
+
         <attr name="emptyString" format="string"/>
         <attr name="emptyLog" format="reference"/>
         <attr name="enableRefreshEmptyView" format="boolean"/>
+
         <attr name="failedString" format="string"/>
         <attr name="failedLogo" format="reference"/>
         <attr name="enableRefreshFailedView" format="boolean"/>
-        <attr name="reverseLayout" format="boolean"/>
+
         <attr name="refreshItemCount" format="integer"/>
     </declare-styleable>
 </resources>

@@ -7,6 +7,7 @@
     <string name="hs_err_exceed_max_image_count">You cannot add image anymore</string>
     <string name="hs_err_min_image_count_with_value">You should choose at least %1$d images.</string>
     <string name="hs_err_no_image">No Images</string>
+    <string name="hs_image_selected_with_value">%1$d/%2$d images selected</string>
     <string name="hs_permission_rationale_external_storage">External storage permissions are needed for providing selecting image.</string>
     <!-- Image Picker End -->
 
