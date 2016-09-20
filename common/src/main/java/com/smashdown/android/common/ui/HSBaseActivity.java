@@ -1,11 +1,15 @@
 package com.smashdown.android.common.ui;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,15 +19,22 @@ import com.smashdown.android.common.R;
 import com.smashdown.android.common.event.HSEventCloseApp;
 import com.smashdown.android.common.event.HSEventNetworkConnected;
 import com.smashdown.android.common.event.HSEventNetworkDisconnected;
+import com.smashdown.android.common.event.HSEventPermissionAllGranted;
+import com.smashdown.android.common.event.HSEventPermissionDenied;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import icepick.Icepick;
 import icepick.State;
 
 public abstract class HSBaseActivity extends AppCompatActivity {
+    private static final int REQ_PERMISSION_ALL = 9900;
+
     protected MaterialDialog mProgressDialog;
     @State    boolean        mIsProgressDialogShowing;
 
@@ -160,5 +171,53 @@ public abstract class HSBaseActivity extends AppCompatActivity {
                 .replace(containerViewId, fragment, fragmentTag)
                 .addToBackStack(backStackStateName)
                 .commit();
+    }
+
+    protected String[] neededPermission() {
+        return null;
+    }
+
+    public boolean checkAndRequestPermissions() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+
+        if (neededPermission() == null || neededPermission().length < 1) {
+            return true;
+        }
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String permission : neededPermission()) {
+            int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
+            if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                Log.i("JJY", "checkAndRequestPermissions() - need " + permission);
+                listPermissionsNeeded.add(permission);
+            }
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            Log.i("JJY", "checkAndRequestPermissions() - send request size=" + listPermissionsNeeded.size());
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQ_PERMISSION_ALL);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Callback received when a permissions request has been completed.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQ_PERMISSION_ALL) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    EventBus.getDefault().post(new HSEventPermissionDenied(permissions[i]));
+                    return;
+                }
+            }
+        }
+        EventBus.getDefault().post(new HSEventPermissionAllGranted());
     }
 }

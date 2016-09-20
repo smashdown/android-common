@@ -3,8 +3,10 @@ package com.smashdown.android.common.util;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.File;
@@ -19,6 +21,7 @@ public class ImageInputHelper {
     public static final  int    REQUEST_CROP_PICTURE         = 25;
     private static final String TAG                          = "ImageInputHelper";
 
+    String mCurrentPhotoPath;
     private File tempFileFromSource = null;
     private Uri  tempUriFromSource  = null;
 
@@ -120,8 +123,8 @@ public class ImageInputHelper {
 
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            tempFileFromSource = File.createTempFile("choose_" + timeStamp, ".png", mContext.getExternalCacheDir());
-            tempUriFromSource = Uri.fromFile(tempFileFromSource);
+            tempFileFromSource = createImageFile();
+            tempUriFromSource = FileProvider.getUriForFile(mContext, "com.hechikasoft.tutorfinder.fileprovider", tempFileFromSource);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -133,6 +136,22 @@ public class ImageInputHelper {
         } else {
             fragment.startActivityForResult(intent, REQUEST_PICTURE_FROM_CAMERA);
         }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
 
     /**

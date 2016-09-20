@@ -258,4 +258,5 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
     @Override
     public void onPageScrollStateChanged(int state) {
     }
+
 }
