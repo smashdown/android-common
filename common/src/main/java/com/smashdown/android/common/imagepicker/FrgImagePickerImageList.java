@@ -84,7 +84,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
 
                 ArrayList<Uri> result = new ArrayList<>();
                 for (HSImageItem i : mSelectedImageItems) {
-                    result.add(Uri.parse(i.data));
+                    result.add(Uri.parse("file://" + i.data));
                 }
                 intent.putParcelableArrayListExtra(HSImagePickerActivity.EXTRA_IMAGE_URIS, result);
 
@@ -141,7 +141,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
 
     @Override
     public boolean updateUI() {
-        mAdapter.notifyDataSetChanged();
+        mRvImageList.setStatus(HSRecyclerView.HSRecyclerViewStatus.SUCCEED, -1);
 
         return false;
     }

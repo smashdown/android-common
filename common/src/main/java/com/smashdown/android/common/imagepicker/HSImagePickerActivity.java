@@ -1,10 +1,8 @@
 package com.smashdown.android.common.imagepicker;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -14,8 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.smashdown.android.common.R;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.ui.HSBaseActivity;
@@ -26,8 +22,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.OnPageChangeListener {
     private static final int REQ_READ_EXTERNAL_STORAGE = 100;
@@ -78,10 +72,8 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
         mViewPager.addOnPageChangeListener(this);
 
-        if (mayRequestExternalStorage()) {
-            mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-            mViewPager.setAdapter(mPagerAdapter);
-        }
+        mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mPagerAdapter);
 
         return false;
     }
@@ -101,36 +93,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
             }
         }
     }
-
-    private boolean mayRequestExternalStorage() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-
-        if (checkSelfPermission(READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-
-        if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
-            new MaterialDialog.Builder(this)
-                    .content(R.string.hs_permission_rationale_external_storage)
-                    .cancelable(false)
-                    .positiveText(android.R.string.ok)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @TargetApi(Build.VERSION_CODES.M)
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, REQ_READ_EXTERNAL_STORAGE);
-                        }
-                    })
-                    .show();
-        } else {
-            requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, REQ_READ_EXTERNAL_STORAGE);
-        }
-
-        return false;
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

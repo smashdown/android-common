@@ -2,6 +2,7 @@ package com.smashdown.android.common.hsrecyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -149,6 +150,13 @@ public class HSRecyclerView extends FrameLayout {
                 mEnabledLoadMore = a.getBoolean(R.styleable.HSRecyclerView_enableLoadMore, false);
                 Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - mEnabledLoadMore=" + mEnabledLoadMore);
 
+                float paddingTop = a.getDimension(R.styleable.HSRecyclerView_paddingTop, 0.0f);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - paddingTop=" + paddingTop);
+
+                float scale = getResources().getDisplayMetrics().density;
+                int dpAsPixels = (int) (paddingTop * scale + 0.5f);
+                setPadding(0, dpAsPixels, 0, 0);
+
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -163,6 +171,7 @@ public class HSRecyclerView extends FrameLayout {
         View view = inflate(getContext(), R.layout.hs_recycler_view, null);
 
         mSrlList = (SwipeRefreshLayout) view.findViewById(R.id.mSrlList);
+        mSrlList.setColorSchemeResources(R.color.OrangeRed, R.color.Coral, R.color.Orange);
         mRvList = (RecyclerView) view.findViewById(R.id.mRvList);
         mLlRecyclerView = view.findViewById(R.id.mLlRecyclerView);
         mLlLoadingInside = view.findViewById(R.id.mLlLoadingInside);
@@ -211,17 +220,17 @@ public class HSRecyclerView extends FrameLayout {
                 } else if (dy > 0) {
                     // Scrolled Down
                 }
-//
-//                if (mLayoutManager instanceof LinearLayoutManager) {
-//                    int totalItem = mLayoutManager.getItemCount();
-//                    int lastVisibleItem = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
-//
-//                    if (totalItem >= REFRESH_COUNT && lastVisibleItem == totalItem - 1) {
-//
-//                    }
-//                } else {
-//
-//                }
+                //
+                //                if (mLayoutManager instanceof LinearLayoutManager) {
+                //                    int totalItem = mLayoutManager.getItemCount();
+                //                    int lastVisibleItem = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+                //
+                //                    if (totalItem >= REFRESH_COUNT && lastVisibleItem == totalItem - 1) {
+                //
+                //                    }
+                //                } else {
+                //
+                //                }
             }
         });
 
@@ -244,9 +253,6 @@ public class HSRecyclerView extends FrameLayout {
         mSrlList.setRefreshing(false); // because we don't use it.
 
         this.status = status;
-
-        Log.d("JJY", "mRvList=" + mRvList);
-        Log.d("JJY", "mRvList.getAdapter()=" + mRvList.getAdapter());
 
         switch (status) {
             case LOADING:
