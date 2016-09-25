@@ -36,36 +36,42 @@ public class HSRecyclerView extends FrameLayout {
     }
 
     // Recycler View
-    protected View                       mLlRecyclerView;
-    protected SwipeRefreshLayout         mSrlList;
-    protected RecyclerView               mRvList;
+    protected View mLlRecyclerView;
+    protected SwipeRefreshLayout mSrlList;
+    protected RecyclerView mRvList;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected View                       mLlLoadingInside;
+    protected View mLlLoadingInside;
 
     // Empty View
-    protected View      mViewEmpty;
+    protected View mViewEmpty;
     protected ImageView mIvEmptyLogo;
-    protected TextView  mTvEmpty;
+    protected TextView mTvEmpty;
 
     // Loading View
     protected View mViewLoading;
 
     // Failed View
-    protected View      mViewFailed;
+    protected View mViewFailed;
     protected ImageView mIvFailed;
-    protected TextView  mTvFailed;
+    protected TextView mTvFailed;
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener;
-    private OnLoadMoreListener                   mLoadMoreListener;
+    private OnLoadMoreListener mLoadMoreListener;
 
-    @State boolean mEnabledPullToRefresh = false;
-    @State boolean mEnabledLoadMore      = false;
+    @State
+    boolean mEnabledPullToRefresh = false;
+    @State
+    boolean mEnabledLoadMore = false;
 
-    @State boolean              mCanLoadMore   = false;
-    @State boolean              mIsDoanloading = false;
-    @State HSRecyclerViewStatus status         = HSRecyclerViewStatus.SUCCEED;
+    @State
+    boolean mCanLoadMore = false;
+    @State
+    boolean mIsDoanloading = false;
+    @State
+    HSRecyclerViewStatus status = HSRecyclerViewStatus.SUCCEED;
 
-    @State int REFRESH_COUNT = 20;
+    @State
+    int REFRESH_COUNT = 20;
 
     public HSRecyclerView(Context context) {
         super(context);
@@ -150,12 +156,19 @@ public class HSRecyclerView extends FrameLayout {
                 mEnabledLoadMore = a.getBoolean(R.styleable.HSRecyclerView_enableLoadMore, false);
                 Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - mEnabledLoadMore=" + mEnabledLoadMore);
 
-                float paddingTop = a.getDimension(R.styleable.HSRecyclerView_paddingTop, 0.0f);
-                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - paddingTop=" + paddingTop);
+                float emptyPaddingTop = a.getDimension(R.styleable.HSRecyclerView_emptyViewPaddingTop, 0.0f);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - emptyPaddingTop=" + emptyPaddingTop);
+
+                float failedPaddingTop = a.getDimension(R.styleable.HSRecyclerView_failedViewPaddingTop, 0.0f);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - failedPaddingTop=" + failedPaddingTop);
 
                 float scale = getResources().getDisplayMetrics().density;
-                int dpAsPixels = (int) (paddingTop * scale + 0.5f);
-                setPadding(0, dpAsPixels, 0, 0);
+                int dpAsPixelsEmptyPaddingTop = (int) (emptyPaddingTop * scale + 0.5f);
+                int dpAsPixelsFailedPaddingTop = (int) (failedPaddingTop * scale + 0.5f);
+
+
+                mViewEmpty.setPadding(0, dpAsPixelsEmptyPaddingTop, 0, 0);
+                mViewFailed.setPadding(0, dpAsPixelsFailedPaddingTop, 0, 0);
 
             } catch (Exception e) {
                 e.printStackTrace();
