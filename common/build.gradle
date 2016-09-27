@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 33
-        versionName "0.3.3"
+        versionCode 40
+        versionName "0.4.0"
 
         // support vector drawable
         vectorDrawables.useSupportLibrary = true
@@ -49,8 +49,5 @@ dependencies {
 
     // ButterKnife
     compile 'com.jakewharton:butterknife:7.0.1'
-
-    // Picasso
-    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 
