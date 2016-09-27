@@ -8,7 +8,6 @@
         android:id="@+id/mViewEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/common_list_background"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="32dip"
