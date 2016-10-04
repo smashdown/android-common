@@ -2,14 +2,10 @@ package com.smashdown.android.common.hsrecyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -36,39 +32,39 @@ public class HSRecyclerView extends FrameLayout {
     }
 
     // Recycler View
-    protected View mLlRecyclerView;
-    protected SwipeRefreshLayout mSrlList;
-    protected RecyclerView mRvList;
+    protected View                       mLlRecyclerView;
+    protected SwipeRefreshLayout         mSrlList;
+    protected RecyclerView               mRvList;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected View mLlLoadingInside;
+    protected View                       mLlLoadingInside;
 
     // Empty View
-    protected View mViewEmpty;
+    protected View      mViewEmpty;
     protected ImageView mIvEmptyLogo;
-    protected TextView mTvEmpty;
+    protected TextView  mTvEmpty;
 
     // Loading View
     protected View mViewLoading;
 
     // Failed View
-    protected View mViewFailed;
+    protected View      mViewFailed;
     protected ImageView mIvFailed;
-    protected TextView mTvFailed;
+    protected TextView  mTvFailed;
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener;
-    private OnLoadMoreListener mLoadMoreListener;
+    private OnLoadMoreListener                   mLoadMoreListener;
 
     @State
     boolean mEnabledPullToRefresh = false;
     @State
-    boolean mEnabledLoadMore = false;
+    boolean mEnabledLoadMore      = false;
 
     @State
-    boolean mCanLoadMore = false;
+    boolean              mCanLoadMore   = false;
     @State
-    boolean mIsDoanloading = false;
+    boolean              mIsDoanloading = false;
     @State
-    HSRecyclerViewStatus status = HSRecyclerViewStatus.SUCCEED;
+    HSRecyclerViewStatus status         = HSRecyclerViewStatus.SUCCEED;
 
     @State
     int REFRESH_COUNT = 20;
@@ -126,6 +122,7 @@ public class HSRecyclerView extends FrameLayout {
 
                 // enable refresh on empty view
                 boolean enableRefreshOnEmptyView = a.getBoolean(R.styleable.HSRecyclerView_enableRefreshEmptyView, false);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - enableRefreshOnEmptyView=" + enableRefreshOnEmptyView);
                 if (enableRefreshOnEmptyView)
                     mViewEmpty.setOnClickListener(new OnClickListener() {
                         @Override
@@ -136,6 +133,7 @@ public class HSRecyclerView extends FrameLayout {
 
                 // enable refresh on failed view
                 boolean enableRefreshOnFailedView = a.getBoolean(R.styleable.HSRecyclerView_enableRefreshFailedView, false);
+                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::Init() - enableRefreshOnFailedView=" + enableRefreshOnFailedView);
                 if (enableRefreshOnFailedView)
                     mViewFailed.setOnClickListener(new OnClickListener() {
                         @Override
@@ -323,6 +321,7 @@ public class HSRecyclerView extends FrameLayout {
     }
 
     private void showEmptyView() {
+        Log.d("JJY", "showEmptyView");
         mViewFailed.setVisibility(View.GONE);
         mViewLoading.setVisibility(View.GONE);
         mViewEmpty.setVisibility(View.VISIBLE);

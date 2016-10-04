@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+//ButterKnife
+apply plugin: 'android-apt'
+
 group = 'com.github.smashdown'
 
 android {
@@ -48,6 +51,7 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
 
     // ButterKnife
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 

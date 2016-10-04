@@ -43,8 +43,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     int mMinCount = 1;
     int mMaxCount = 1;
 
-    // TODO: onsavestate
-
     private List<HSImageItem> mImages             = new ArrayList<>();
     private List<HSImageItem> mSelectedImageItems = new ArrayList<>();
 
@@ -58,13 +56,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         frg.setArguments(bundle);
 
         return frg;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -95,27 +86,33 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         return true;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = setContentView(inflater, container, R.layout.frg_image_picker_image_list, this);
-
-        mRvImageList = (HSRecyclerView) rootView.findViewById(R.id.mRvImageList);
-
-        int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 5 : 3;
-        mAdapter = new ImageAdapter();
-        mRvImageList.setAdapter(new GridLayoutManager(getActivity(), spanCount), mAdapter);
-
-        return rootView;
+    protected int getLayoutId() {
+        return R.layout.frg_image_picker_image_list;
     }
 
     @Override
     protected boolean setupData(Bundle bundle) {
+        setHasOptionsMenu(true);
+
         if (bundle == null) {
             mMinCount = getArguments().getInt(HSImagePickerActivity.KEY_MIN_COUNT, 1);
             mMaxCount = getArguments().getInt(HSImagePickerActivity.KEY_MAX_COUNT, 1);
         }
         return true;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        mRvImageList = (HSRecyclerView) view.findViewById(R.id.mRvFolderList);
+        int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 5 : 3;
+        mAdapter = new ImageAdapter();
+        mRvImageList.setAdapter(new GridLayoutManager(getActivity(), spanCount), mAdapter);
+
+        return view;
     }
 
     @Override

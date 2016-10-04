@@ -48,15 +48,9 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.frg_image_picker_folder_list, container, false);
-        mRvFolderList = (HSRecyclerView) rootView.findViewById(R.id.mRvFolderList);
-
-        setupUI();
-
-        return rootView;
+    protected int getLayoutId() {
+        return R.layout.frg_image_picker_folder_list;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.smashdown.android.common.ui;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,11 +39,14 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     protected abstract boolean setupData(Bundle savedInstanceState);
 
+    public abstract boolean updateData();
+
+    protected abstract int getLayoutId();
+
     protected abstract boolean setupUI(Bundle savedInstanceState);
 
-    protected abstract boolean updateData();
+    public abstract boolean updateUI();
 
-    protected abstract boolean updateUI();
 
     protected abstract void onNetworkConnected();
 
@@ -65,34 +67,25 @@ public abstract class HSBaseActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         Icepick.restoreInstanceState(this, savedInstanceState);
 
+        // TODO: direction 다양하게
+        if (useDefaultTransitionAnimation())
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+
         if (setupData(savedInstanceState)) {
+            setContentView(getLayoutId());
+            ButterKnife.bind(this);
             setupUI(savedInstanceState);
+
             updateData();
-            updateUI();
         } else {
             finish();
         }
-    }
-
-    protected void setContentView(int layoutID, Activity target) {
-        setContentView(layoutID);
-        ButterKnife.bind(target);
-
-        if (useDefaultTransitionAnimation())
-            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Icepick.saveInstanceState(this, outState);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        updateUI();
     }
 
     @Override
@@ -114,6 +107,10 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     public String getActivityName() {
         return getClass().getSimpleName();
+    }
+
+    public void showProgressDialog(int stringResId) {
+        showProgressDialog(getString(stringResId));
     }
 
     public void showProgressDialog(String message) {
@@ -220,6 +217,6 @@ public abstract class HSBaseActivity extends AppCompatActivity {
                 }
             }
         }
-        EventBus.getDefault().post(new HSEventPermissionAllGranted());
+        EventBus.getDefault().post(new HSEventPermissionAllGranted(permissions));
     }
 }

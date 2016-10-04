@@ -19,12 +19,30 @@ import icepick.State;
 public abstract class HSBaseFragment extends Fragment {
     @State boolean empty;
 
+    // Data
+    protected abstract boolean setupData(Bundle savedInstanceState);
+
+    public abstract boolean updateData();
+
+    // UI
+    protected abstract int getLayoutId();
+
+    protected abstract boolean setupUI();
+
+    public abstract boolean updateUI();
+
+
+    // if this fragment used in viewPager it will be used for the tab strip.
+    public abstract String getTitle();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // init modules
         EventBus.getDefault().register(this);
+
+        // IcePick
         Icepick.restoreInstanceState(this, savedInstanceState);
 
         // init data
@@ -38,6 +56,17 @@ public abstract class HSBaseFragment extends Fragment {
         super.onDestroy();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.bind(this, view);
+
+        setupUI();
+
+        return view;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -45,52 +74,12 @@ public abstract class HSBaseFragment extends Fragment {
         updateData();
     }
 
-    /**
-     * All the fragments who extends this class, should call this method in onCreateView
-     *
-     * @param inflater
-     * @param container
-     * @param layoutID
-     * @param frg
-     * @return
-     */
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, int layoutID, Fragment frg) {
-        View rootView = inflater.inflate(layoutID, container, false);
-        ButterKnife.bind(frg, rootView);
-
-        setupUI();
-
-        return rootView;
-    }
-
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateUI();
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
-
-    /**
-     * In this method, you have to initiate data for this module that has no dependancy
-     *
-     * @param savedInstanceState
-     * @return
-     */
-    protected abstract boolean setupData(Bundle savedInstanceState);
-
-    /**
-     * Implements code to init views, without data.
-     *
-     * @return
-     */
-    protected abstract boolean setupUI();
-
-    public abstract boolean updateData();
-
-    public abstract boolean updateUI();
-
-    // if this fragment used in viewPager it will be used for the tab strip.
-    public abstract String getTitle();
 
     @Subscribe
     public void onEvent(HSEventEmpty event) {

@@ -23,8 +23,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.smashdown.android.common.R;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -166,7 +164,7 @@ public class AndroidUtils {
                 if (!TextUtils.isEmpty(code))
                     return code;
                 else
-                    return "AUS"; // TODO: 하드코딩
+                    return "KR"; // TODO: 하드코딩
             }
         } catch (Exception e) {
         }
@@ -228,11 +226,13 @@ public class AndroidUtils {
         }
     }
 
+
     public static int getToolbarHeight(Context context) {
-        final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.actionBarSize});
+        final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
         int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
         styledAttributes.recycle();
 
         return toolbarHeight;
     }
+
 }

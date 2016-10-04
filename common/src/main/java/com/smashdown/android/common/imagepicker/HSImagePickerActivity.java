@@ -63,9 +63,12 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
     }
 
     @Override
-    protected boolean setupUI(Bundle bundle) {
-        setContentView(R.layout.image_picker_activity, this);
+    protected int getLayoutId() {
+        return R.layout.image_picker_activity;
+    }
 
+    @Override
+    protected boolean setupUI(Bundle bundle) {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setupActionBar();
 
@@ -115,14 +118,12 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
     }
 
     @Override
-    protected boolean updateData() {
-
-
+    public boolean updateData() {
         return false;
     }
 
     @Override
-    protected boolean updateUI() {
+    public boolean updateUI() {
         return true;
     }
 

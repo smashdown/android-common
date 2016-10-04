@@ -1,4 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,14 +12,16 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="32dip"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <ImageView
             android:id="@+id/mIvEmptyLogo"
             android:layout_width="96dip"
             android:layout_height="96dip"
             android:scaleType="fitXY"
-            android:tint="@color/Gray" />
+            android:tint="@color/Gray"
+            app:srcCompat="@drawable/ic_error_outline_white"/>
 
         <TextView
             android:id="@+id/mTvEmpty"
@@ -26,7 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="8dip"
-            android:textAppearance="@style/AppText.Subhead" />
+            android:textAppearance="@style/AppText.Subhead"/>
 
     </LinearLayout>
 
@@ -39,7 +42,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 
@@ -50,7 +53,8 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="32dip"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <ImageView
             android:id="@+id/mIvFailed"
@@ -58,7 +62,7 @@
             android:layout_height="96dip"
             android:scaleType="fitXY"
             android:tint="@color/Gray"
-            app:srcCompat="@drawable/ic_error_outline_white" />
+            app:srcCompat="@drawable/ic_error_outline_white"/>
 
         <TextView
             android:id="@+id/mTvFailed"
@@ -66,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
             android:gravity="center"
-            android:textAppearance="@style/AppText.Subhead" />
+            android:textAppearance="@style/AppText.Subhead"/>
 
     </LinearLayout>
 
@@ -74,7 +78,8 @@
         android:id="@+id/mLlRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/mSrlList"
@@ -85,7 +90,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mRvList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <LinearLayout
@@ -100,7 +105,7 @@
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"/>
         </LinearLayout>
     </LinearLayout>
 
