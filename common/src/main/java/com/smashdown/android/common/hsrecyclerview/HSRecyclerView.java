@@ -54,17 +54,11 @@ public class HSRecyclerView extends FrameLayout {
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener;
     private OnLoadMoreListener                   mLoadMoreListener;
 
-    @State
-    boolean mEnabledPullToRefresh = false;
-    @State
-    boolean mEnabledLoadMore      = false;
+    @State boolean mEnabledPullToRefresh = false;
+    @State boolean mEnabledLoadMore      = false;
 
-    @State
-    boolean              mCanLoadMore   = false;
-    @State
-    boolean              mIsDoanloading = false;
-    @State
-    HSRecyclerViewStatus status         = HSRecyclerViewStatus.SUCCEED;
+    @State boolean              mCanLoadMore = false;
+    @State HSRecyclerViewStatus status       = HSRecyclerViewStatus.SUCCEED;
 
     @State
     int REFRESH_COUNT = 20;
@@ -216,32 +210,21 @@ public class HSRecyclerView extends FrameLayout {
                         Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mCanLoadMore=" + mCanLoadMore);
                         return;
                     }
-                    if (mIsDoanloading) {
-                        Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mIsDoanloading=" + mIsDoanloading);
+                    if (status == HSRecyclerViewStatus.LOADING) {
+                        Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - its LOADING=" + HSRecyclerViewStatus.LOADING.name());
                         return;
                     }
                     if (mLoadMoreListener == null) {
                         Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::OnScrollListener() NO LOAD MORE cuz - mLoadMoreListener=" + mLoadMoreListener);
                         return;
                     }
-                    mIsDoanloading = true;
+                    status = HSRecyclerViewStatus.LOADING;
                     mLoadMoreListener.onLoadMore();
                 } else if (dy < 0) {
                     // Scrolled Up
                 } else if (dy > 0) {
                     // Scrolled Down
                 }
-                //
-                //                if (mLayoutManager instanceof LinearLayoutManager) {
-                //                    int totalItem = mLayoutManager.getItemCount();
-                //                    int lastVisibleItem = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
-                //
-                //                    if (totalItem >= REFRESH_COUNT && lastVisibleItem == totalItem - 1) {
-                //
-                //                    }
-                //                } else {
-                //
-                //                }
             }
         });
 
@@ -267,21 +250,12 @@ public class HSRecyclerView extends FrameLayout {
 
         switch (status) {
             case LOADING:
-                mIsDoanloading = true;
-                if (mRvList.getAdapter().getItemCount() > 0) {
-                    showRecyclerView();
-                } else {
-                    showLoadingView();
-                }
+                showLoadingView();
                 break;
             case FAILED:
-                mIsDoanloading = false;
                 showFailedView();
                 break;
             case SUCCEED:
-                mIsDoanloading = false;
-
-                mRvList.getAdapter().notifyDataSetChanged();
                 if (mRvList.getAdapter().getItemCount() > 0) {
                     showRecyclerView();
                 } else {
@@ -296,21 +270,28 @@ public class HSRecyclerView extends FrameLayout {
                     }
                 }
 
+                mRvList.getAdapter().notifyDataSetChanged();
                 Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::setStatus() status=" + status.name() + ", currentItemCount=" + mRvList.getAdapter().getItemCount() + ", mCanLoadMore=" + mCanLoadMore);
                 break;
-        }
-        if (mIsDoanloading && mLlRecyclerView.getVisibility() == View.VISIBLE) {
-            mLlLoadingInside.setVisibility(View.VISIBLE);
-        } else {
-            mLlLoadingInside.setVisibility(View.GONE);
         }
     }
 
     private void showLoadingView() {
-        mViewLoading.setVisibility(View.VISIBLE);
-        mViewFailed.setVisibility(View.GONE);
-        mViewEmpty.setVisibility(View.GONE);
-        mLlRecyclerView.setVisibility(View.GONE);
+        if (mRvList.getAdapter().getItemCount() > 0) {
+            mViewLoading.setVisibility(View.GONE);
+            mViewFailed.setVisibility(View.GONE);
+            mViewEmpty.setVisibility(View.GONE);
+            mLlRecyclerView.setVisibility(View.VISIBLE);
+
+            mLlLoadingInside.setVisibility(View.VISIBLE);
+        } else {
+            mViewLoading.setVisibility(View.VISIBLE);
+            mViewFailed.setVisibility(View.GONE);
+            mViewEmpty.setVisibility(View.GONE);
+            mLlRecyclerView.setVisibility(View.GONE);
+
+            mLlLoadingInside.setVisibility(View.GONE);
+        }
     }
 
     private void showFailedView() {
@@ -333,6 +314,7 @@ public class HSRecyclerView extends FrameLayout {
         mViewFailed.setVisibility(View.GONE);
         mViewEmpty.setVisibility(View.GONE);
         mLlRecyclerView.setVisibility(View.VISIBLE);
+        mLlLoadingInside.setVisibility(View.GONE);
     }
 
     @Override

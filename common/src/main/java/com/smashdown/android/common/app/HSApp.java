@@ -50,6 +50,9 @@ public abstract class HSApp extends Application implements Application.ActivityL
     }
 
     public static Context getAppContext() {
+        if (mAppContext == null)
+            mAppContext = getAppContext();
+
         return mAppContext;
     }
 

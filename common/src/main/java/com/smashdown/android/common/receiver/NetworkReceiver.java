@@ -14,12 +14,12 @@ import org.greenrobot.eventbus.EventBus;
 public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
-    public void onReceive(final Context context, final Intent intent) {
-        HSPreferences pref = HSPreferences.getInstance();
+    public void onReceive(Context context, final Intent intent) {
+        HSPreferences pref = new HSPreferences(context);
 
         boolean lastConnected = pref.isNetworkConnected();
         boolean currentConnected = NetworkUtil.isConnected(context);
-//        LogUtils.d("NetworkChangeReceiver::onReceive()() - oldStatus=" + lastConnected + ", newStatus=" + currentConnected);
+        //        LogUtils.d("NetworkChangeReceiver::onReceive()() - oldStatus=" + lastConnected + ", newStatus=" + currentConnected);
 
         if (currentConnected != lastConnected) {
             pref.setNetworkConnected(currentConnected);
@@ -30,7 +30,7 @@ public class NetworkReceiver extends BroadcastReceiver {
                 EventBus.getDefault().post(new HSEventNetworkDisconnected());
             }
         } else {
-//            LogUtils.d("NetworkChangeReceiver() - same status, so ignore it");
+            //            LogUtils.d("NetworkChangeReceiver() - same status, so ignore it");
         }
     }
 }

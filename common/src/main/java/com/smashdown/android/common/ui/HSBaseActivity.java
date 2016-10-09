@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -172,21 +173,42 @@ public abstract class HSBaseActivity extends AppCompatActivity {
                 .commit();
     }
 
-    protected String[] neededPermission() {
-        return null;
-    }
-
-    public boolean checkAndRequestPermissions() {
+    public boolean checkPermissions(String[] neededPermission) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
 
-        if (neededPermission() == null || neededPermission().length < 1) {
+        if (neededPermission == null || neededPermission.length < 1) {
             return true;
         }
 
         List<String> listPermissionsNeeded = new ArrayList<>();
-        for (String permission : neededPermission()) {
+        for (String permission : neededPermission) {
+            int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
+            if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                Log.i("JJY", "checkPermissions() - need " + permission);
+                listPermissionsNeeded.add(permission);
+            }
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            Log.i("JJY", "checkPermissions() - send request size=" + listPermissionsNeeded.size());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkAndRequestPermissions(String[] neededPermission) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+
+        if (neededPermission == null || neededPermission.length < 1) {
+            return true;
+        }
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String permission : neededPermission) {
             int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
             if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
                 Log.i("JJY", "checkAndRequestPermissions() - need " + permission);
@@ -217,6 +239,6 @@ public abstract class HSBaseActivity extends AppCompatActivity {
                 }
             }
         }
-        EventBus.getDefault().post(new HSEventPermissionAllGranted(permissions));
+        EventBus.getDefault().post(new HSEventPermissionAllGranted(Arrays.asList(permissions)));
     }
 }
