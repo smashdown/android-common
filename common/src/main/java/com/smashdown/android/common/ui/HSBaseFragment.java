@@ -72,6 +72,7 @@ public abstract class HSBaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         updateData();
+        updateUI();
     }
 
 

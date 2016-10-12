@@ -78,6 +78,7 @@ public abstract class HSBaseActivity extends AppCompatActivity {
             setupUI(savedInstanceState);
 
             updateData();
+            updateUI();
         } else {
             finish();
         }
