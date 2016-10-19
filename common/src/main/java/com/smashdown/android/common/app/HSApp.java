@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
-import com.smashdown.android.common.BuildConfig;
 import com.smashdown.android.common.event.HSEventAppGoToBackground;
 import com.smashdown.android.common.event.HSEventAppGoToForeground;
 import com.smashdown.android.common.util.Foreground;
@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 
-public abstract class HSApp extends Application implements Application.ActivityLifecycleCallbacks {
+public abstract class HSApp extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
     public static final String LOG_TAG = HSApp.class.getSimpleName();
 
     protected static Context mAppContext;
