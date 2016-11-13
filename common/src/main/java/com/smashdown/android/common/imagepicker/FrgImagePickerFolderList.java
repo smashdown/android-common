@@ -3,7 +3,6 @@ package com.smashdown.android.common.imagepicker;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,16 +18,14 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.smashdown.android.common.R;
+import com.smashdown.android.common.hsrecyclerview.HSRecyclerView;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
-import com.smashdown.android.common.imagepicker.model.HSImageItem;
 import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
 import com.smashdown.android.common.ui.HSBaseFragment;
-import com.smashdown.android.common.hsrecyclerview.HSRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +55,21 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
         return true;
     }
 
-
+    @Nullable
     @Override
-    protected boolean setupUI() {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        mRvFolderList = (HSRecyclerView) view.findViewById(R.id.rvFolderList);
 
         mAdapter = new ImageFolderAdapter();
         mRvFolderList.setAdapter(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false), mAdapter);
 
+        return view;
+    }
+
+    @Override
+    protected boolean setupUI() {
         return true;
     }
 

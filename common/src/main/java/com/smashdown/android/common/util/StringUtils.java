@@ -43,4 +43,17 @@ public class StringUtils {
     public static boolean isNumericString(String str) {
         return TextUtils.isDigitsOnly(str);
     }
+
+    public static String makeHiddenUserName(String email) {
+        String id = email.split("@")[0];
+        int halfPos = id.length() / 3;
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < id.length(); i++) {
+            if (i < halfPos)
+                builder.append(id.charAt(i));
+            else
+                builder.append("*");
+        }
+        return builder.toString();
+    }
 }

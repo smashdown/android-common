@@ -107,7 +107,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mRvImageList = (HSRecyclerView) view.findViewById(R.id.mRvFolderList);
+        mRvImageList = (HSRecyclerView) view.findViewById(R.id.rvImageList);
         int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 5 : 3;
         mAdapter = new ImageAdapter();
         mRvImageList.setAdapter(new GridLayoutManager(getActivity(), spanCount), mAdapter);

@@ -239,6 +239,12 @@ public class HSRecyclerView extends FrameLayout {
         }
 
         mLayoutManager = layoutManager;
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                updateViewState(HSRecyclerViewStatus.SUCCEED);
+            }
+        });
         mRvList.setLayoutManager(mLayoutManager);
         mRvList.setAdapter(adapter);
     }
@@ -247,7 +253,19 @@ public class HSRecyclerView extends FrameLayout {
         mSrlList.setRefreshing(false); // because we don't use it.
 
         this.status = status;
+        updateViewState(this.status);
 
+        if (lastAddedItemCount != -1) {
+            if (lastAddedItemCount < REFRESH_COUNT) {
+                mCanLoadMore = false;
+            } else {
+                mCanLoadMore = true;
+            }
+        }
+        mRvList.getAdapter().notifyDataSetChanged();
+    }
+
+    private void updateViewState(HSRecyclerViewStatus status) {
         switch (status) {
             case LOADING:
                 showLoadingView();
@@ -261,17 +279,6 @@ public class HSRecyclerView extends FrameLayout {
                 } else {
                     showEmptyView();
                 }
-
-                if (lastAddedItemCount != -1) {
-                    if (lastAddedItemCount < REFRESH_COUNT) {
-                        mCanLoadMore = false;
-                    } else {
-                        mCanLoadMore = true;
-                    }
-                }
-
-                mRvList.getAdapter().notifyDataSetChanged();
-                Log.d("JJY", HSRecyclerView.class.getSimpleName() + "::setStatus() status=" + status.name() + ", currentItemCount=" + mRvList.getAdapter().getItemCount() + ", mCanLoadMore=" + mCanLoadMore);
                 break;
         }
     }
@@ -302,7 +309,6 @@ public class HSRecyclerView extends FrameLayout {
     }
 
     private void showEmptyView() {
-        Log.d("JJY", "showEmptyView");
         mViewFailed.setVisibility(View.GONE);
         mViewLoading.setVisibility(View.GONE);
         mViewEmpty.setVisibility(View.VISIBLE);
