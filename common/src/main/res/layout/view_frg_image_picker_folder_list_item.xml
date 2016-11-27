@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivImage"
             android:layout_width="64dp"
             android:layout_height="64dp"
@@ -33,17 +33,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 tools:text="folder name"/>
 
-            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
             <TextView
                 android:id="@+id/tvImageCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/Gray"
                 tools:text="folder name"/>

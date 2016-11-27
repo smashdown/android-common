@@ -9,13 +9,12 @@
     android:orientation="vertical"
     android:padding="32dip">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/ivLogo"
         android:layout_width="96dip"
         android:layout_height="96dip"
         android:scaleType="fitXY"
-        android:tint="@color/DarkGray"
-        app:srcCompat="@drawable/ic_warning_white"/>
+        app:srcCompat="@drawable/ic_warning_gray"/>
 
     <TextView
         android:id="@+id/tvEmptyMessage"

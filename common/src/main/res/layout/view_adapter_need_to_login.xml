@@ -17,7 +17,7 @@
         android:gravity="center"
         android:lineSpacingExtra="4dip"
         android:padding="16dip"
-        android:textAppearance="@style/AppText.Body2"
+        android:textAppearance="@style/AppText.Subhead"
         tools:ignore="HardcodedText"/>
 
     <Button
