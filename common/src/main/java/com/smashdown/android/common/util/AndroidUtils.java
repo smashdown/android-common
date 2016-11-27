@@ -10,7 +10,11 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.FileProvider;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -23,11 +27,15 @@ import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smashdown.android.common.app.HSApp;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AndroidUtils {
-
     public static void toast(Context context, final String msg) {
         try {
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
@@ -136,12 +144,12 @@ public class AndroidUtils {
         }
     }
 
-    //    public static void hideKeyboard(Activity context) {
-    //        InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-    //        View v = context.getCurrentFocus();
-    //        if (v != null)
-    //            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    //    }
+    public static void hideKeyboard(Activity context) {
+        InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        View v = context.getCurrentFocus();
+        if (v != null)
+            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
     //
     //    public static void showKeyboard(Activity activity) {
     //        InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -163,12 +171,11 @@ public class AndroidUtils {
 
                 if (!TextUtils.isEmpty(code))
                     return code;
-                else
-                    return "KR"; // TODO: 하드코딩
             }
         } catch (Exception e) {
         }
-        return "";
+
+        return "KR";
     }
 
     public static void goToMarket(Activity activity, String appPackageName) {
@@ -201,14 +208,6 @@ public class AndroidUtils {
         return context.getContentResolver().getType(uri);
     }
 
-    public static void hideKeyboard(Activity context) {
-        View view = context.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
     public static String getMimeType(String url) {
         String type = null;
         String extension = MimeTypeMap.getFileExtensionFromUrl(url);
@@ -235,4 +234,70 @@ public class AndroidUtils {
         return toolbarHeight;
     }
 
+
+    public static String takePhoto(Fragment fragment, String providerAuthority, int REQ_TAKE_PHOTO) {
+        // Ensure that there's a camera activity to handle the intent
+        try {
+            // Create the File where the photo should go
+            File photoFile = createImageFile(fragment.getActivity());
+            Uri photoURI = FileProvider.getUriForFile(fragment.getActivity(), providerAuthority, photoFile);
+            String absoluteFilePath = photoFile.getAbsolutePath();
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+            if (intent.resolveActivity(fragment.getActivity().getPackageManager()) != null) {
+                fragment.startActivityForResult(intent, REQ_TAKE_PHOTO);
+                return absoluteFilePath;
+            } else {
+                Log.e(HSApp.LOG_TAG, "takePhoto - no activity to handle this intent");
+            }
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public static String takePhoto(Activity context, String providerAuthority, int REQ_TAKE_PHOTO) {
+        // Ensure that there's a camera activity to handle the intent
+        try {
+            // Create the File where the photo should go
+            File photoFile = createImageFile(context);
+            Uri photoURI = FileProvider.getUriForFile(context, providerAuthority, photoFile);
+            String absoluteFilePath = photoFile.getAbsolutePath();
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+            if (intent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivityForResult(intent, REQ_TAKE_PHOTO);
+                return absoluteFilePath;
+            } else {
+                Log.e(HSApp.LOG_TAG, "takePhoto - no activity to handle this intent");
+            }
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
+
+    private static File createImageFile(Context context) throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "jpeg_" + timeStamp + "_";
+        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        // mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
 }

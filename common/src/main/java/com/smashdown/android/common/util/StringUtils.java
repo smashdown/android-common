@@ -1,8 +1,12 @@
 package com.smashdown.android.common.util;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.smashdown.android.common.R;
+
+import java.text.Format;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,15 +34,17 @@ public class StringUtils {
         return Patterns.WEB_URL.matcher(url).matches();
     }
 
-    public static boolean isValidEmail(String email) {
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        if (TextUtils.isEmpty(email))
-            return false;
 
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+    public static boolean isValidEmail(String inputStr) {
+        String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(inputStr);
+        if (!m.matches()) {
+            return false;
+        }
+        return true;
     }
+
 
     public static boolean isNumericString(String str) {
         return TextUtils.isDigitsOnly(str);
@@ -55,5 +61,38 @@ public class StringUtils {
                 builder.append("*");
         }
         return builder.toString();
+    }
+
+    // replace newlines with <br>
+    public static String replaceNewlinesWithBreaks(String source) {
+        return source != null ? source.replaceAll("(?:\n|\r\n)","<br>") : "";
+    }
+    // replace newlines with <br>
+    public static String replaceNewlinesWithBreaks(Context context, int stringId) {
+        return context.getString(stringId) != null ? context.getString(stringId).replaceAll("(?:\n|\r\n)","<br>") : "";
+    }
+
+    private static       Format format = null;
+    private static final int    WEEK   = 1000 * 60 * 60 * 24 * 7;
+    private static final int    DAY    = 1000 * 60 * 60 * 24;
+    private static final int    HOUR   = 1000 * 60 * 60;
+    private static final int    MINUTE = 1000 * 60;
+
+    public static String makeDateString(Context context, long date) {
+        long now = System.currentTimeMillis();
+        long elapse = now - date;
+
+        if (format == null) {
+            format = android.text.format.DateFormat.getDateFormat(context);
+        }
+        if (elapse > WEEK) {
+            return format.format(date);
+        } else if (elapse > DAY) {
+            return String.format("%d %s", elapse / DAY, context.getString(R.string.hs_days_ago));
+        } else if (elapse > HOUR) {
+            return String.format("%d %s", elapse / HOUR, context.getString(R.string.hs_hours_ago));
+        } else {
+            return String.format("%d %s", elapse / MINUTE, context.getString(R.string.hs_minutes_ago));
+        }
     }
 }

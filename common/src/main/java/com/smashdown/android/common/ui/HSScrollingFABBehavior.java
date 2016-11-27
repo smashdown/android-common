@@ -26,7 +26,7 @@ public class HSScrollingFABBehavior extends CoordinatorLayout.Behavior<FloatingA
     public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionButton fab, View dependency) {
         if (dependency instanceof AppBarLayout) {
             CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
-            int fabBottomMargin = lp.bottomMargin;
+            int fabBottomMargin = lp.bottomMargin + lp.topMargin;
             int distanceToScroll = fab.getHeight() + fabBottomMargin;
             float ratio = (float) dependency.getY() / (float) toolbarHeight;
             fab.setTranslationY(-distanceToScroll * ratio);

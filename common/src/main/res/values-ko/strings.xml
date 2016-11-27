@@ -1,0 +1,18 @@
+<resources>
+    <!-- Image Picker -->
+    <string name="hs_select_image">이미지 선택</string>
+    <string name="hs_all_images">모든 이미지</string>
+    <string name="hs_err_exceed_max_image_count">더 이상 이미지를 첨부할 수 없습니다.</string>
+    <string name="hs_err_min_image_count_with_value">최소한 %1$d 개의 이미지를 선택해야 합니다.</string>
+    <string name="hs_err_no_image">이미지가 없습니다.</string>
+    <string name="hs_image_selected_with_value">%1$d/%2$d 이미지 선택됨</string>
+    <string name="hs_permission_rationale_external_storage">이미지 첨부를 위해 저장소 접근 권한이 필요합니다.</string>
+    <!-- Image Picker End -->
+
+    <string name="hs_days_ago">일 전</string>
+    <string name="hs_hours_ago">시간 전</string>
+    <string name="hs_minutes_ago">분 전</string>
+
+    <!-- Common Adapter -->
+    <string name="hs_err_server_unavailable_with_refresh">Cannot connect to server.\nplease check network status.\n\n(Press here to refresh)</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dip">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="96dip"
+        android:layout_height="96dip"
+        android:scaleType="fitXY"
+        android:tint="@color/DarkGray"
+        app:srcCompat="@drawable/ic_warning_white"/>
+
+    <TextView
+        android:id="@+id/tvFailedMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dip"
+        android:gravity="center"
+        android:text="@string/hs_err_server_unavailable_with_refresh"
+        android:textAppearance="@style/AppText.Subhead"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

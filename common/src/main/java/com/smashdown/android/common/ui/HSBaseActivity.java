@@ -34,8 +34,13 @@ import icepick.Icepick;
 import icepick.State;
 
 public abstract class HSBaseActivity extends AppCompatActivity {
+    public enum HSTransitionDirection {
+        NONE, FROM_RIGHT_TO_LEFT, FROM_LEFT_TO_RIGHT, FROM_TOP_TO_BOTTOM, FROM_BOTTOM_TO_TOP
+    }
+
     private static final int REQ_PERMISSION_ALL = 9900;
 
+    private HSTransitionDirection mTransitionAnamationDirection = HSTransitionDirection.FROM_RIGHT_TO_LEFT;
     protected MaterialDialog mProgressDialog;
     @State    boolean        mIsProgressDialogShowing;
 
@@ -50,29 +55,47 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
     public abstract boolean updateUI();
 
+    protected void onNetworkConnected() {
+    }
 
-    protected abstract void onNetworkConnected();
+    protected void onNetworkDisconnected() {
+    }
 
-    protected abstract void onNetworkDisconnected();
-
-    protected abstract boolean useDefaultTransitionAnimation();
+    protected HSTransitionDirection getTransitionAnimationDirection() {
+        return HSTransitionDirection.FROM_RIGHT_TO_LEFT;
+    }
 
     public String getTag() {
-        return null;
+        return "";
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         // init modules
         initProgressDialog();
         EventBus.getDefault().register(this);
         Icepick.restoreInstanceState(this, savedInstanceState);
 
-        // TODO: direction 다양하게
-        if (useDefaultTransitionAnimation())
-            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        switch (getTransitionAnimationDirection()) {
+            case FROM_RIGHT_TO_LEFT:
+                overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+                break;
+            case FROM_LEFT_TO_RIGHT:
+                overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
+                break;
+            case FROM_TOP_TO_BOTTOM:
+                overridePendingTransition(R.anim.pull_in_top, R.anim.push_out_bottom);
+                break;
+            case FROM_BOTTOM_TO_TOP:
+                overridePendingTransition(R.anim.pull_in_bottom, R.anim.push_out_top);
+                break;
+            case NONE:
+                // no animation
+                break;
+        }
 
         if (setupData(savedInstanceState)) {
             setContentView(getLayoutId());
@@ -109,10 +132,6 @@ public abstract class HSBaseActivity extends AppCompatActivity {
                 .build();
     }
 
-    public String getActivityName() {
-        return getClass().getSimpleName();
-    }
-
     public void showProgressDialog(int stringResId) {
         showProgressDialog(getString(stringResId));
     }
@@ -134,7 +153,21 @@ public abstract class HSBaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
+
+        switch (getTransitionAnimationDirection()) {
+            case FROM_RIGHT_TO_LEFT:
+                overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
+                break;
+            case FROM_LEFT_TO_RIGHT:
+                overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+                break;
+            case FROM_TOP_TO_BOTTOM:
+                overridePendingTransition(R.anim.pull_in_bottom, R.anim.push_out_top);
+                break;
+            case FROM_BOTTOM_TO_TOP:
+                overridePendingTransition(R.anim.pull_in_top, R.anim.push_out_bottom);
+                break;
+        }
     }
 
     @Subscribe

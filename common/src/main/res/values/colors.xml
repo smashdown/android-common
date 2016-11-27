@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="common_text_color">#808080</color>
+    <color name="common_text_color">#404040</color>
     <color name="common_list_background">#e3e3e3</color>
 
     <!-- Pink colors-->
@@ -157,8 +157,8 @@
     <color name="Gainsboro" type="color">#FFDCDCDC</color>
     <color name="LightGrey" type="color">#FFD3D3D3</color>
     <color name="Silver" type="color">#FFC0C0C0</color>
-    <color name="DarkGray" type="color">#FFA9A9A9</color>
-    <color name="Gray" type="color">#FF808080</color>
+    <color name="Gray" type="color">#FFA9A9A9</color>
+    <color name="DarkGray" type="color">#FF808080</color>
     <color name="DimGray" type="color">#FF696969</color>
     <color name="LightSlateGray" type="color">#FF778899</color>
     <color name="SlateGray" type="color">#FF708090</color>

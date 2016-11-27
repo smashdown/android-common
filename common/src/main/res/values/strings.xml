@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Common</string>
-
     <!-- Image Picker -->
     <string name="hs_select_image">Select Image</string>
     <string name="hs_all_images">All Images</string>
@@ -11,4 +9,10 @@
     <string name="hs_permission_rationale_external_storage">External storage permissions are needed for providing selecting image.</string>
     <!-- Image Picker End -->
 
+    <string name="hs_days_ago">days ago</string>
+    <string name="hs_hours_ago">hours ago</string>
+    <string name="hs_minutes_ago">minutes ago</string>
+
+    <!-- Common Adapter -->
+    <string name="hs_err_server_unavailable_with_refresh">서버에 접속할 수 없습니다.\n네트워크 상태를 확인해 주세요.\n\n(새로고침 하려면 누르세요)</string>
 </resources>

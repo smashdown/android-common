@@ -18,6 +18,8 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.ButterKnife;
 
 public abstract class HSApp extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
+    public static final int PAGE_ITEM_COUNT = 20;
+
     public static final String LOG_TAG = HSApp.class.getSimpleName();
 
     protected static Context mAppContext;

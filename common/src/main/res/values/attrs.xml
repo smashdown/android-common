@@ -15,20 +15,4 @@
         <attr name="aspectRatioHeight" format="integer"/>
     </declare-styleable>
 
-    <declare-styleable name="HSRecyclerView">
-        <attr name="enablePullToRefresh" format="boolean"/>
-        <attr name="enableLoadMore" format="boolean"/>
-
-        <attr name="emptyString" format="string"/>
-        <attr name="emptyLog" format="reference"/>
-        <attr name="enableRefreshEmptyView" format="boolean"/>
-        <attr name="emptyViewPaddingTop" format="dimension" />
-
-        <attr name="failedString" format="string"/>
-        <attr name="failedLogo" format="reference"/>
-        <attr name="failedViewPaddingTop" format="dimension" />
-
-        <attr name="enableRefreshFailedView" format="boolean"/>
-        <attr name="refreshItemCount" format="integer"/>
-    </declare-styleable>
 </resources>
