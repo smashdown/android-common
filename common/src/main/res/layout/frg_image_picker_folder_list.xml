@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.smashdown.android.common.hsrecyclerview.HSRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/rvFolderList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        app:emptyLog="@drawable/ic_error_outline_white"
-        app:emptyString="No Image Folders"
-        app:enableLoadMore="false"
-
-        app:enablePullToRefresh="false"
-        app:enableRefreshEmptyView="false"
-        app:enableRefreshFailedView="false"
-
-        app:failedLogo="@drawable/ic_error_outline_white"
-        app:failedString="No Image Folders"
-        app:refreshItemCount="9999"/>/>
+        android:layout_height="match_parent"/>
 </RelativeLayout>

@@ -5,20 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.smashdown.android.common.hsrecyclerview.HSRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/rvImageList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        app:emptyLog="@drawable/ic_error_outline_white"
-        app:emptyString="No Image"
-        app:enableLoadMore="false"
-
-        app:enablePullToRefresh="false"
-        app:enableRefreshEmptyView="true"
-        app:enableRefreshFailedView="true"
-
-        app:failedLogo="@drawable/ic_error_outline_white"
-        app:failedString="No Image"
-        app:refreshItemCount="999999"/>
+        android:layout_height="match_parent"/>
 </RelativeLayout>

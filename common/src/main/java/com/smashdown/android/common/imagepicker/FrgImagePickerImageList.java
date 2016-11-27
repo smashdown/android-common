@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,8 +21,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.hsrecyclerview.HSRecyclerView;
+import com.smashdown.android.common.app.HSApp;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
 import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
@@ -37,8 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FrgImagePickerImageList extends HSBaseFragment {
-    private HSRecyclerView mRvImageList;
-    private ImageAdapter   mAdapter;
+    private RecyclerView mRvImageList;
+    private ImageAdapter mAdapter;
 
     int mMinCount = 1;
     int mMaxCount = 1;
@@ -107,10 +111,11 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mRvImageList = (HSRecyclerView) view.findViewById(R.id.rvImageList);
+        mRvImageList = (RecyclerView) view.findViewById(R.id.rvImageList);
         int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 5 : 3;
         mAdapter = new ImageAdapter();
-        mRvImageList.setAdapter(new GridLayoutManager(getActivity(), spanCount), mAdapter);
+        mRvImageList.setLayoutManager(new GridLayoutManager(getActivity(), spanCount));
+        mRvImageList.setAdapter(mAdapter);
 
         return view;
     }
@@ -138,8 +143,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
 
     @Override
     public boolean updateUI() {
-        mRvImageList.setStatus(HSRecyclerView.HSRecyclerViewStatus.SUCCEED, -1);
-
+        mAdapter.notifyDataSetChanged();
         return false;
     }
 
@@ -164,7 +168,23 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         public void onBindViewHolder(ItemViewHolder holder, int position) {
             HSImageItem image = mImages.get(position);
 
-            Glide.with(getActivity()).load(new File(image.data)).centerCrop().into(holder.ivImage);
+            Glide.with(getActivity())
+                    .load(new File(image.data))
+                    .listener(new RequestListener<File, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, File model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            Log.d(HSApp.LOG_TAG, "failed image model=" + model);
+                            e.printStackTrace();
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, File model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    })
+                    .centerCrop()
+                    .into(holder.ivImage);
 
             if (mSelectedImageItems.contains(image)) {
                 holder.cbCheckBox.setChecked(true);
@@ -232,20 +252,29 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         new AsyncTask<String, String, String>() {
             @Override
             protected void onPreExecute() {
-                mRvImageList.setStatus(HSRecyclerView.HSRecyclerViewStatus.LOADING, -1);
             }
 
             @Override
             protected String doInBackground(String... params) {
+
+                // 읽기 불가능 한 파일 제거
+                List<HSImageItem> images = MediaStoreImageUtil.getImagesByFolderName(getActivity(), params[0]);
+                List<HSImageItem> existingImages = new ArrayList<>();
+                for (HSImageItem item : images) {
+                    File testFile = new File(item.data);
+                    if (testFile.exists())
+                        existingImages.add(item);
+                }
+
                 mImages.clear();
-                mImages.addAll(MediaStoreImageUtil.getImagesByFolderName(getActivity(), params[0]));
+                mImages.addAll(existingImages);
 
                 return "";
             }
 
             @Override
             protected void onPostExecute(String s) {
-                mRvImageList.setStatus(HSRecyclerView.HSRecyclerViewStatus.SUCCEED, mImages.size());
+                updateUI();
             }
         }.execute(event.item.bucketDisplayName);
 

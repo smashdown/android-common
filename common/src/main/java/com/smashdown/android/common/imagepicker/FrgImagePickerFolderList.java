@@ -18,7 +18,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.hsrecyclerview.HSRecyclerView;
+import com.smashdown.android.common.app.HSApp;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
@@ -26,11 +26,12 @@ import com.smashdown.android.common.ui.HSBaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FrgImagePickerFolderList extends HSBaseFragment {
-    private HSRecyclerView     mRvFolderList;
+    private RecyclerView       mRvFolderList;
     private ImageFolderAdapter mAdapter;
 
     private List<HSImageFolderItem> mFolders = new ArrayList<>();
@@ -60,10 +61,11 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mRvFolderList = (HSRecyclerView) view.findViewById(R.id.rvFolderList);
+        mRvFolderList = (RecyclerView) view.findViewById(R.id.rvFolderList);
 
         mAdapter = new ImageFolderAdapter();
-        mRvFolderList.setAdapter(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false), mAdapter);
+        mRvFolderList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRvFolderList.setAdapter(mAdapter);
 
         return view;
     }
@@ -78,14 +80,21 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
         new AsyncTask<String, String, String>() {
             @Override
             protected void onPreExecute() {
-                mRvFolderList.setStatus(HSRecyclerView.HSRecyclerViewStatus.LOADING, -1);
             }
 
             @Override
             protected String doInBackground(String... params) {
                 mFolders.clear();
 
-                mFolders.addAll(MediaStoreImageUtil.getBucketList(getActivity()));
+                // 읽기 불가능 한 파일 제거,
+                List<HSImageFolderItem> bucketList = MediaStoreImageUtil.getBucketList(getActivity());
+                List<HSImageFolderItem> existingFiles = new ArrayList<>();
+                for (HSImageFolderItem item : bucketList) {
+                    File testFile = new File(item.lastData);
+                    if (testFile.exists())
+                        existingFiles.add(item);
+                }
+                mFolders.addAll(existingFiles);
 
                 HSImageFolderItem allImageFolder = new HSImageFolderItem();
                 allImageFolder.bucketDisplayName = getString(R.string.hs_all_images);
@@ -99,7 +108,7 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
 
             @Override
             protected void onPostExecute(String s) {
-                mRvFolderList.setStatus(HSRecyclerView.HSRecyclerViewStatus.SUCCEED, mFolders.size());
+                updateUI();
             }
 
             private void bindLastItem(HSImageFolderItem allFolder, List<HSImageFolderItem> folders) {
@@ -126,6 +135,8 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
 
     @Override
     public boolean updateUI() {
+        mAdapter.notifyDataSetChanged();
+
         return false;
     }
 
@@ -154,15 +165,17 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
             holder.tvImageCount.setText(String.valueOf(folder.imageCount));
 
             Log.d("JJY", "Glide loading=" + folder.lastData);
-            Glide.with(getActivity()).load("file:" + folder.lastData).centerCrop().listener(new RequestListener<String, GlideDrawable>() {
+            Glide.with(getActivity()).load(new File(folder.lastData)).centerCrop().listener(new RequestListener<File, GlideDrawable>() {
                 @Override
-                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                public boolean onException(Exception e, File model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    Log.d(HSApp.LOG_TAG, "failed image model=" + model);
                     e.printStackTrace();
+
                     return false;
                 }
 
                 @Override
-                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                public boolean onResourceReady(GlideDrawable resource, File model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                     return false;
                 }
             }).into(holder.ivImage);

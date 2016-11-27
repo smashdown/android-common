@@ -148,11 +148,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
     }
 
     @Override
-    protected boolean useDefaultTransitionAnimation() {
-        return true;
-    }
-
-    @Override
     public String getTag() {
         return null;
     }

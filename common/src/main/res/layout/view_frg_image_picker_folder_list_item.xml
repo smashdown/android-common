@@ -21,7 +21,6 @@
             android:layout_height="64dp"
             android:layout_marginEnd="16dip"
             android:layout_marginRight="16dip"
-            android:contentDescription="@string/app_name"
             tools:background="@color/Gray"/>
 
         <LinearLayout
