@@ -28,7 +28,6 @@ public class NeedToRegisterViewHolder extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClick(View v) {
-        if (mRefreshListener != null)
-            mRefreshListener.onNeedToLogin();
+        // TODO
     }
 }

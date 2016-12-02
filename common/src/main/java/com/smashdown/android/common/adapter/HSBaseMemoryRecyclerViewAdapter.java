@@ -18,6 +18,7 @@ import com.smashdown.android.common.adapter.viewholder.FailedViewHolder;
 import com.smashdown.android.common.adapter.viewholder.LoadingViewHolder;
 import com.smashdown.android.common.app.HSApp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class HSBaseMemoryRecyclerViewAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter implements HSBaseRefreshInterface {
@@ -29,16 +30,13 @@ public abstract class HSBaseMemoryRecyclerViewAdapter<T, VH extends RecyclerView
     protected String mFailedMessage  = "Cannot connect to server, after checking network status try it again please.";
 
     protected Context mContext = null;
-    HSRefreshListener mRefreshListener;
+    protected HSRefreshListener mRefreshListener;
 
     protected List<T> mDataList = null;
 
-    public HSBaseMemoryRecyclerViewAdapter(Context context, List<T> data, HSRefreshListener refreshListener) {
-        if (data == null)
-            throw new IllegalArgumentException("data cannot be null");
-
+    public HSBaseMemoryRecyclerViewAdapter(Context context, HSRefreshListener refreshListener) {
         mContext = context;
-        mDataList = data;
+        mDataList = new ArrayList<T>();
         mRefreshListener = refreshListener;
     }
 
@@ -214,5 +212,9 @@ public abstract class HSBaseMemoryRecyclerViewAdapter<T, VH extends RecyclerView
             this.mDataList.clear();
 
         this.mDataList.addAll(newData);
+    }
+
+    public List<T> getDataList() {
+        return this.mDataList;
     }
 }
