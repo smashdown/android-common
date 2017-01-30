@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
  * Created by Jongyoung on 2016. 1. 19..
  */
 public class StringUtils {
+    private static final Pattern NON_CHARACTER_PATTERN = Pattern.compile("([^\\d])");
+    
     public static boolean hasUppercase(String str) {
         return !str.equals(str.toLowerCase());
     }
@@ -65,11 +67,27 @@ public class StringUtils {
 
     // replace newlines with <br>
     public static String replaceNewlinesWithBreaks(String source) {
-        return source != null ? source.replaceAll("(?:\n|\r\n)","<br>") : "";
+        return source != null ? source.replaceAll("(?:\n|\r\n)", "<br>") : "";
     }
+
     // replace newlines with <br>
     public static String replaceNewlinesWithBreaks(Context context, int stringId) {
-        return context.getString(stringId) != null ? context.getString(stringId).replaceAll("(?:\n|\r\n)","<br>") : "";
+        return context.getString(stringId) != null ? context.getString(stringId).replaceAll("(?:\n|\r\n)", "<br>") : "";
+    }
+
+    public static String extractOnlyDigit(final String orgString) {
+        if (orgString == null)
+            return "";
+
+        StringBuffer destStringBuffer = new StringBuffer();
+        Matcher m = NON_CHARACTER_PATTERN.matcher(orgString);
+
+        while (m.find()) {
+            m.appendReplacement(destStringBuffer, "");
+        }
+        m.appendTail(destStringBuffer);
+
+        return destStringBuffer.toString().toLowerCase();
     }
 
     private static       Format format = null;

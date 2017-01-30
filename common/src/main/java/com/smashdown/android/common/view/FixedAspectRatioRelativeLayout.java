@@ -38,18 +38,25 @@ public class FixedAspectRatioRelativeLayout extends RelativeLayout {
 
         a.recycle();
     }
-    // **overrides**
+
+    public void setAspectRatio(int width, int height) {
+        this.mAspectRatioWidth = width;
+        this.mAspectRatioHeight = height;
+        invalidate();
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+
         int receivedWidth = MeasureSpec.getSize(widthMeasureSpec);
         int receivedHeight = MeasureSpec.getSize(heightMeasureSpec);
 
         int measuredWidth;
         int measuredHeight;
         boolean widthDynamic;
+
         if (heightMode == MeasureSpec.EXACTLY) {
             if (widthMode == MeasureSpec.EXACTLY) {
                 widthDynamic = receivedWidth == 0;
@@ -62,6 +69,7 @@ public class FixedAspectRatioRelativeLayout extends RelativeLayout {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
+
         if (widthDynamic) {
             // Width is dynamic.
             int w = (int) (receivedHeight * ((float) mAspectRatioWidth / mAspectRatioHeight));

@@ -15,7 +15,6 @@ public class HSDateFormatProvider {
     public static DateFormat DF_DATE_MEDIUM = DateFormat.getDateInstance(DateFormat.MEDIUM);
     public static DateFormat DF_DATE_SHORT  = DateFormat.getDateInstance(DateFormat.SHORT);
     public static DateFormat DF_DATE_LONG   = DateFormat.getDateInstance(DateFormat.LONG);
-    ;
 
     public static DateFormat DF_TIME_SHORT_01  = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
     public static DateFormat DF_TIME_SHORT_02  = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);

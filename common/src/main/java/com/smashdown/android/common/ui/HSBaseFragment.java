@@ -1,39 +1,37 @@
 package com.smashdown.android.common.ui;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.smashdown.android.common.event.HSEventEmpty;
+import com.smashdown.android.common.mvp.BaseView;
+import com.smashdown.android.common.util.AndroidUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.ButterKnife;
-import icepick.Icepick;
-import icepick.State;
 
-public abstract class HSBaseFragment extends Fragment {
-    @State boolean empty;
+public abstract class HSBaseFragment extends Fragment implements BaseView {
+    protected MaterialDialog mProgressDialog;
 
-    // Data
-    protected abstract boolean setupData(Bundle savedInstanceState);
-
-    public abstract boolean updateData();
-
-    // UI
+    @LayoutRes
     protected abstract int getLayoutId();
+
+    protected abstract boolean setupData(Bundle savedInstanceState);
 
     protected abstract boolean setupUI();
 
+    public abstract boolean updateData();
+
     public abstract boolean updateUI();
-
-
-    // if this fragment used in viewPager it will be used for the tab strip.
-    public abstract String getTitle();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,9 +39,7 @@ public abstract class HSBaseFragment extends Fragment {
 
         // init modules
         EventBus.getDefault().register(this);
-
-        // IcePick
-        Icepick.restoreInstanceState(this, savedInstanceState);
+        initProgressDialog();
 
         // init data
         setupData(savedInstanceState);
@@ -75,14 +71,56 @@ public abstract class HSBaseFragment extends Fragment {
         updateUI();
     }
 
+    private void initProgressDialog() {
+        mProgressDialog = new MaterialDialog.Builder(getActivity())
+                .content("Loading...")
+                .progress(true, 0)
+                .cancelable(false)
+                .build();
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
     }
 
     @Subscribe
     public void onEvent(HSEventEmpty event) {
+    }
+
+    @Override
+    public void showProgressDialog(int stringResId) {
+        showProgressDialog(getString(stringResId));
+    }
+
+    @Override
+    public void showProgressDialog(String message) {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            if (!TextUtils.isEmpty(message))
+                mProgressDialog.setContent(message);
+            mProgressDialog.show();
+        }
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+            mProgressDialog.dismiss();
+    }
+
+    @Override
+    public void toast(int stringResId) {
+        AndroidUtils.toast(getActivity(), stringResId);
+    }
+
+    @Override
+    public void toast(String str) {
+        AndroidUtils.toast(getActivity(), str);
+    }
+
+    @Override
+    public void hideKeyboard() {
+        AndroidUtils.hideKeyboard(getActivity());
     }
 }

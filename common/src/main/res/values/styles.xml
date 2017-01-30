@@ -9,51 +9,61 @@
         <item name="android:textColor">@color/common_text_color</item>
     </style>
 
+    <!-- 12sp -->
     <style name="AppText.Caption" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 14sp -->
     <style name="AppText.Body1" parent="@style/TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 14sp -->
     <style name="AppText.Body2" parent="@style/TextAppearance.AppCompat.Body2">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 16sp -->
     <style name="AppText.Subhead" parent="@style/TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 20sp -->
     <style name="AppText.Title" parent="@style/TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 24sp -->
     <style name="AppText.Headline" parent="@style/TextAppearance.AppCompat.Headline">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 34sp -->
     <style name="AppText.Display1" parent="@style/TextAppearance.AppCompat.Display1">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 45sp -->
     <style name="AppText.Display2" parent="@style/TextAppearance.AppCompat.Display2">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 56sp -->
     <style name="AppText.Display3" parent="@style/TextAppearance.AppCompat.Display3">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>
     </style>
 
+    <!-- 112sp -->
     <style name="AppText.Display4" parent="@style/TextAppearance.AppCompat.Display4">
         <item name="android:textColor">@color/common_text_color</item>
         <item name="android:lineSpacingExtra">4dip</item>

@@ -121,7 +121,7 @@ public abstract class HSBaseMemoryRecyclerViewAdapter<T, VH extends RecyclerView
                 itemCount += getFooterViewCount();
                 break;
         }
-        Log.d(HSApp.LOG_TAG, this.getClass().getSimpleName() + "::getItemCount() - mStatus=" + mStatus + ", itemCount=" + itemCount);
+        //        Log.d(HSApp.LOG_TAG, this.getClass().getSimpleName() + "::getItemCount() - mStatus=" + mStatus + ", itemCount=" + itemCount);
 
         return itemCount;
     }
@@ -153,7 +153,7 @@ public abstract class HSBaseMemoryRecyclerViewAdapter<T, VH extends RecyclerView
                 type = HSRecyclerViewType.FAILED.ordinal();
                 break;
         }
-        Log.i(HSApp.LOG_TAG, this.getClass().getSimpleName() + "::getItemViewType() - pos=" + position + ", type=" + type);
+        //        Log.i(HSApp.LOG_TAG, this.getClass().getSimpleName() + "::getItemViewType() - pos=" + position + ", type=" + type);
 
         return type;
     }
@@ -162,20 +162,22 @@ public abstract class HSBaseMemoryRecyclerViewAdapter<T, VH extends RecyclerView
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         if (viewType == HSRecyclerViewType.LOADING.ordinal()) {
+            Log.e(HSApp.LOG_TAG, HSBaseMemoryRecyclerViewAdapter.class.getSimpleName() + "::onCreateViewHolder() - LOADING");
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_adapter_loading, parent, false);
             VH holder = (VH) new LoadingViewHolder(view);
             ((LoadingViewHolder) holder).tvLoadingMessage = (TextView) view.findViewById(R.id.tvLoadingMessage);
             ((LoadingViewHolder) holder).root = view.findViewById(R.id.root);
             return holder;
         } else if (viewType == HSRecyclerViewType.EMPTY.ordinal()) {
+            Log.e(HSApp.LOG_TAG, HSBaseMemoryRecyclerViewAdapter.class.getSimpleName() + "::onCreateViewHolder() - EMPTY");
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_adapter_empty, parent, false);
             return (VH) new EmptyViewHolder(view, mRefreshListener);
         } else if (viewType == HSRecyclerViewType.FAILED.ordinal()) {
+            Log.e(HSApp.LOG_TAG, HSBaseMemoryRecyclerViewAdapter.class.getSimpleName() + "::onCreateViewHolder() - FAILED");
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_adapter_failed, parent, false);
             return (VH) new FailedViewHolder(view, mRefreshListener);
         }
 
-        Log.e(HSApp.LOG_TAG, HSBaseMemoryRecyclerViewAdapter.class.getSimpleName() + "::onCreateViewHolder() - ERROR");
         return null;
     }
 

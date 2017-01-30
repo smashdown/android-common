@@ -10,11 +10,15 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -33,7 +37,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AndroidUtils {
     public static void toast(Context context, final String msg) {
@@ -157,7 +163,6 @@ public class AndroidUtils {
     //        if (v != null)
     //            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.SHOW_IMPLICIT);
     //    }
-
 
     public static String getCountryCode(Context context) {
         try {
@@ -299,5 +304,111 @@ public class AndroidUtils {
         // Save a file: path for use with ACTION_VIEW intents
         // mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+
+    //    READ_CALENDAR
+    //    WRITE_CALENDAR
+    //    CAMERA
+    //    READ_CONTACTS
+    //    WRITE_CONTACTS
+    //    GET_ACCOUNTS
+    //    ACCESS_FINE_LOCATION
+    //    ACCESS_COARSE_LOCATION
+    //    RECORD_AUDIO
+    //    READ_PHONE_STATE
+    //    CALL_PHONE
+    //    READ_CALL_LOG
+    //    WRITE_CALL_LOG
+    //    ADD_VOICEMAIL
+    //    USE_SIP
+    //    PROCESS_OUTGOING_CALLS
+    //    BODY_SENSORS
+    //    SEND_SMS
+    //    RECEIVE_SMS
+    //    READ_SMS
+    //    RECEIVE_WAP_PUSH
+    //    RECEIVE_MMS
+    //    READ_EXTERNAL_STORAGE
+    //    WRITE_EXTERNAL_STORAGE
+
+    public static boolean checkPermissions(Context context, String[] neededPermission) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+
+        if (neededPermission == null || neededPermission.length < 1) {
+            return true;
+        }
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String permission : neededPermission) {
+            int permissionStatus = ContextCompat.checkSelfPermission(context, permission);
+            if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                Log.i("JJY", "checkPermissions() - need " + permission);
+                listPermissionsNeeded.add(permission);
+            }
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            Log.i("JJY", "checkPermissions() - send request size=" + listPermissionsNeeded.size());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkAndRequestPermissions(AppCompatActivity context, int requestCode, String[] neededPermission) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+
+        if (neededPermission == null || neededPermission.length < 1) {
+            return true;
+        }
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String permission : neededPermission) {
+            int permissionStatus = ContextCompat.checkSelfPermission(context, permission);
+            if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                Log.i("JJY", "checkAndRequestPermissions() - need " + permission);
+                listPermissionsNeeded.add(permission);
+            }
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            Log.i("JJY", "checkAndRequestPermissions() - send request size=" + listPermissionsNeeded.size());
+            ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), requestCode);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkAndRequestPermissions(Fragment context, int requestCode, String[] neededPermission) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Log.d("JJY", "checkAndRequestPermissions() - no need to check permission for low android versions");
+            return true;
+        }
+
+        if (neededPermission == null || neededPermission.length < 1) {
+            Log.d("JJY", "checkAndRequestPermissions() - neededPermission is empty");
+            return true;
+        }
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String permission : neededPermission) {
+            int permissionStatus = ContextCompat.checkSelfPermission(context.getActivity(), permission);
+            if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                Log.i("JJY", "checkAndRequestPermissions() - need " + permission);
+                listPermissionsNeeded.add(permission);
+            }
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            Log.i("JJY", "checkAndRequestPermissions() - send request size=" + listPermissionsNeeded.size());
+            context.requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), requestCode);
+            return false;
+        }
+
+        Log.d("JJY", "checkAndRequestPermissions() - all the permissions are ready");
+        return true;
     }
 }

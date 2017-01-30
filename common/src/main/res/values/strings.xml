@@ -14,5 +14,5 @@
     <string name="hs_minutes_ago">minutes ago</string>
 
     <!-- Common Adapter -->
-    <string name="hs_err_server_unavailable_with_refresh">서버에 접속할 수 없습니다.\n네트워크 상태를 확인해 주세요.\n\n(새로고침 하려면 누르세요)</string>
+    <string name="hs_err_server_unavailable_with_refresh">Cannot connect to server.\nplease check network status.\n\n(Press here to refresh)</string>
 </resources>

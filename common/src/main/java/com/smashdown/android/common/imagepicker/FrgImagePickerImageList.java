@@ -87,7 +87,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
                 getActivity().finish();
             }
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -99,10 +99,9 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     protected boolean setupData(Bundle bundle) {
         setHasOptionsMenu(true);
 
-        if (bundle == null) {
-            mMinCount = getArguments().getInt(HSImagePickerActivity.KEY_MIN_COUNT, 1);
-            mMaxCount = getArguments().getInt(HSImagePickerActivity.KEY_MAX_COUNT, 1);
-        }
+        mMinCount = getArguments().getInt(HSImagePickerActivity.KEY_MIN_COUNT, 1);
+        mMaxCount = getArguments().getInt(HSImagePickerActivity.KEY_MAX_COUNT, 1);
+
         return true;
     }
 
@@ -145,11 +144,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
     public boolean updateUI() {
         mAdapter.notifyDataSetChanged();
         return false;
-    }
-
-    @Override
-    public String getTitle() {
-        return null;
     }
 
     class ImageAdapter extends RecyclerView.Adapter<ItemViewHolder> {
@@ -223,7 +217,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
                 checkBox.toggle();
 
                 if (checkBox.isChecked()) {
-                    if (mSelectedImageItems.size() >= mMaxCount) {
+                    if (mMaxCount > 0 && mSelectedImageItems.size() >= mMaxCount) {
                         checkBox.toggle();
                         AndroidUtils.toast(getActivity(), R.string.hs_err_exceed_max_image_count);
                         return;
@@ -241,7 +235,10 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         if (!TextUtils.isEmpty(title))
             ((HSBaseActivity) getActivity()).getSupportActionBar().setTitle(title);
 
-        ((HSBaseActivity) getActivity()).getSupportActionBar().setSubtitle(String.format(getString(R.string.hs_image_selected_with_value), mSelectedImageItems.size(), mMaxCount));
+        if (mMaxCount > 0)
+            ((HSBaseActivity) getActivity()).getSupportActionBar().setSubtitle(String.format(getString(R.string.hs_image_selected_with_value), mSelectedImageItems.size(), mMaxCount));
+        else
+            ((HSBaseActivity) getActivity()).getSupportActionBar().setSubtitle(null);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

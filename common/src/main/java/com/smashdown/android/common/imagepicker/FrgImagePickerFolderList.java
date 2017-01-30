@@ -140,11 +140,6 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
         return false;
     }
 
-    @Override
-    public String getTitle() {
-        return null;
-    }
-
     class ImageFolderAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
         public ImageFolderAdapter() {
@@ -164,7 +159,7 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
             holder.tvFolderName.setText(folder.bucketDisplayName);
             holder.tvImageCount.setText(String.valueOf(folder.imageCount));
 
-            Log.d("JJY", "Glide loading=" + folder.lastData);
+            // Log.d("JJY", "Glide loading=" + folder.lastData);
             Glide.with(getActivity()).load(new File(folder.lastData)).centerCrop().listener(new RequestListener<File, GlideDrawable>() {
                 @Override
                 public boolean onException(Exception e, File model, Target<GlideDrawable> target, boolean isFirstResource) {

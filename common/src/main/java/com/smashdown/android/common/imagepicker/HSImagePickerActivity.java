@@ -48,16 +48,9 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected boolean setupData(Bundle bundle) {
-        if (bundle == null) {
-            mMinCount = getIntent().getIntExtra(KEY_MIN_COUNT, 1);
-            mMaxCount = getIntent().getIntExtra(KEY_MAX_COUNT, 1);
-        }
+        mMinCount = getIntent().getIntExtra(KEY_MIN_COUNT, 1);
+        mMaxCount = getIntent().getIntExtra(KEY_MAX_COUNT, 1);
 
         return true;
     }
@@ -95,15 +88,6 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
                 finish();
             }
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBar() {
