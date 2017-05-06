@@ -15,4 +15,5 @@
 
     <!-- Common Adapter -->
     <string name="hs_err_server_unavailable_with_refresh">서버에 접속할 수 없습니다.\n네트워크 상태를 확인해 주세요.\n\n(새로고침 하려면 누르세요)</string>
+    <string name="hs_rewarded_ad_desc">수업을 듣기 위해서 광고를 시청하시겠습니까?</string>
 </resources>

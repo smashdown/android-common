@@ -15,4 +15,5 @@
 
     <!-- Common Adapter -->
     <string name="hs_err_server_unavailable_with_refresh">Cannot connect to server.\nplease check network status.\n\n(Press here to refresh)</string>
+    <string name="hs_rewarded_ad_desc">To see the lesson, you should watch rewarded ad. Would you like to continue?</string>
 </resources>
