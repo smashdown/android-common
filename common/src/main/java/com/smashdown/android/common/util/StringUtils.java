@@ -14,8 +14,14 @@ import java.util.regex.Pattern;
  * Created by Jongyoung on 2016. 1. 19..
  */
 public class StringUtils {
+
     private static final Pattern NON_CHARACTER_PATTERN = Pattern.compile("([^\\d])");
-    
+    private static final int     WEEK                  = 1000 * 60 * 60 * 24 * 7;
+    private static final int     DAY                   = 1000 * 60 * 60 * 24;
+    private static final int     HOUR                  = 1000 * 60 * 60;
+    private static final int     MINUTE                = 1000 * 60;
+    private static       Format  format                = null;
+
     public static boolean hasUppercase(String str) {
         return !str.equals(str.toLowerCase());
     }
@@ -36,7 +42,6 @@ public class StringUtils {
         return Patterns.WEB_URL.matcher(url).matches();
     }
 
-
     public static boolean isValidEmail(String inputStr) {
         String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
         Pattern p = Pattern.compile(regex);
@@ -47,7 +52,6 @@ public class StringUtils {
         return true;
     }
 
-
     public static boolean isNumericString(String str) {
         return TextUtils.isDigitsOnly(str);
     }
@@ -57,10 +61,11 @@ public class StringUtils {
         int halfPos = id.length() / 3;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < id.length(); i++) {
-            if (i < halfPos)
+            if (i < halfPos) {
                 builder.append(id.charAt(i));
-            else
+            } else {
                 builder.append("*");
+            }
         }
         return builder.toString();
     }
@@ -76,8 +81,9 @@ public class StringUtils {
     }
 
     public static String extractOnlyDigit(final String orgString) {
-        if (orgString == null)
+        if (orgString == null) {
             return "";
+        }
 
         StringBuffer destStringBuffer = new StringBuffer();
         Matcher m = NON_CHARACTER_PATTERN.matcher(orgString);
@@ -89,12 +95,6 @@ public class StringUtils {
 
         return destStringBuffer.toString().toLowerCase();
     }
-
-    private static       Format format = null;
-    private static final int    WEEK   = 1000 * 60 * 60 * 24 * 7;
-    private static final int    DAY    = 1000 * 60 * 60 * 24;
-    private static final int    HOUR   = 1000 * 60 * 60;
-    private static final int    MINUTE = 1000 * 60;
 
     public static String makeDateString(Context context, long date) {
         long now = System.currentTimeMillis();

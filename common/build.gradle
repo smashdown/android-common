@@ -63,8 +63,15 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
-    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.googlecode.libphonenumber:libphonenumber:7.3.1'
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
+    compile "com.google.firebase:firebase-crash:$firebaseVersion"
+
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    kapt "com.android.databinding:compiler:$androidPlugInVersion"
 }
 
 kotlin {

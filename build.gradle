@@ -4,8 +4,10 @@ buildscript {
     ext {
         androidPlugInVersion = '2.4.0-alpha7'
         supportLibVersion = '25.3.1'
+        retrofitVersion = '2.2.0'
+        firebaseVersion = '10.2.1'
 
-        kotlinVersion = '1.1.2-4'
+        kotlinVersion = '1.1.2-3'
     }
     repositories {
         jcenter()

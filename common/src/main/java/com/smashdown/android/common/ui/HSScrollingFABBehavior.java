@@ -7,14 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.smashdown.android.common.util.AndroidUtils;
+import com.smashdown.android.common.util.UiUtil;
 
 public class HSScrollingFABBehavior extends CoordinatorLayout.Behavior<FloatingActionButton> {
     private int toolbarHeight;
 
     public HSScrollingFABBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.toolbarHeight = AndroidUtils.getToolbarHeight(context);
+        this.toolbarHeight = UiUtil.getToolbarHeight(context);
     }
 
     @Override

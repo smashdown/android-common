@@ -25,13 +25,12 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.app.HSApp;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.imagepicker.model.HSImageItem;
 import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
 import com.smashdown.android.common.ui.HSBaseActivity;
 import com.smashdown.android.common.ui.HSBaseFragment;
-import com.smashdown.android.common.util.AndroidUtils;
+import com.smashdown.android.common.util.UiUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -73,7 +72,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
         int id = item.getItemId();
         if (id == R.id.action_done) {
             if (mSelectedImageItems.size() < mMinCount) {
-                AndroidUtils.toast(getActivity(), String.format(getString(R.string.hs_err_min_image_count_with_value), mMinCount));
+                UiUtil.toast(getActivity(), String.format(getString(R.string.hs_err_min_image_count_with_value), mMinCount));
             } else {
                 Intent intent = new Intent();
 
@@ -167,7 +166,6 @@ public class FrgImagePickerImageList extends HSBaseFragment {
                     .listener(new RequestListener<File, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, File model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            Log.d(HSApp.LOG_TAG, "failed image model=" + model);
                             e.printStackTrace();
                             return false;
                         }
@@ -219,7 +217,7 @@ public class FrgImagePickerImageList extends HSBaseFragment {
                 if (checkBox.isChecked()) {
                     if (mMaxCount > 0 && mSelectedImageItems.size() >= mMaxCount) {
                         checkBox.toggle();
-                        AndroidUtils.toast(getActivity(), R.string.hs_err_exceed_max_image_count);
+                        UiUtil.toast(getActivity(), R.string.hs_err_exceed_max_image_count);
                         return;
                     }
                     mSelectedImageItems.add(imageItem);

@@ -10,8 +10,9 @@ public class PhoneUtil {
     public static String convertToInternationalFormat(String countryCode, String phone) {
         try {
             PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-            if (TextUtils.isEmpty(countryCode) || TextUtils.isEmpty(phone))
+            if (TextUtils.isEmpty(countryCode) || TextUtils.isEmpty(phone)) {
                 return phone;
+            }
             //
             //        phone = phone.replace(" ", "");
             //        if (phone.startsWith("+"))
@@ -38,8 +39,9 @@ public class PhoneUtil {
     public static String convertToLocalFormat(String countryCode, String phone) {
         try {
             PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-            if (TextUtils.isEmpty(countryCode) || TextUtils.isEmpty(phone))
+            if (TextUtils.isEmpty(countryCode) || TextUtils.isEmpty(phone)) {
                 return phone;
+            }
 
             Phonenumber.PhoneNumber phoneNum = phoneUtil.parse(phone, countryCode);
             return phoneUtil.format(phoneNum, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
@@ -52,8 +54,9 @@ public class PhoneUtil {
     public static String formatLocalPhoneNumber(String countryCode, String phone) {
         try {
             PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-            if (TextUtils.isEmpty(countryCode) || TextUtils.isEmpty(phone))
+            if (TextUtils.isEmpty(countryCode) || TextUtils.isEmpty(phone)) {
                 return phone;
+            }
 
             Phonenumber.PhoneNumber phoneNum = phoneUtil.parse(phone, countryCode);
             return phoneUtil.format(phoneNum, PhoneNumberUtil.PhoneNumberFormat.NATIONAL).replace(" ", "-");

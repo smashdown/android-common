@@ -13,11 +13,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.smashdown.android.common.event.HSEventEmpty;
 import com.smashdown.android.common.mvp.BaseView;
 import com.smashdown.android.common.util.AndroidUtils;
+import com.smashdown.android.common.util.UiUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import butterknife.ButterKnife;
 
 public abstract class HSBaseFragment extends Fragment implements BaseView {
     protected MaterialDialog mProgressDialog;
@@ -56,7 +55,6 @@ public abstract class HSBaseFragment extends Fragment implements BaseView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, view);
 
         setupUI();
 
@@ -111,16 +109,16 @@ public abstract class HSBaseFragment extends Fragment implements BaseView {
 
     @Override
     public void toast(int stringResId) {
-        AndroidUtils.toast(getActivity(), stringResId);
+        UiUtil.toast(getActivity(), stringResId);
     }
 
     @Override
     public void toast(String str) {
-        AndroidUtils.toast(getActivity(), str);
+        UiUtil.toast(getActivity(), str);
     }
 
     @Override
     public void hideKeyboard() {
-        AndroidUtils.hideKeyboard(getActivity());
+        UiUtil.hideKeyboard(getActivity());
     }
 }

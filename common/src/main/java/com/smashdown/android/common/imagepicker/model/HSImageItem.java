@@ -19,6 +19,7 @@ public class HSImageItem {
     public double longitude;
     public int    miniThumbMagic;
     public String picasaId;
+    public boolean selected;
 
     @Override
     public boolean equals(Object o) {

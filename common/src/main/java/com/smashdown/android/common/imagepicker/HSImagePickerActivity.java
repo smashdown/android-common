@@ -10,12 +10,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.smashdown.android.common.R;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.ui.HSBaseActivity;
-import com.smashdown.android.common.util.AndroidUtils;
+import com.smashdown.android.common.util.UiUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -84,7 +83,7 @@ public class HSImagePickerActivity extends HSBaseActivity implements ViewPager.O
                 mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
                 mViewPager.setAdapter(mPagerAdapter);
             } else {
-                AndroidUtils.toast(this, R.string.hs_permission_rationale_external_storage);
+                UiUtil.toast(this, R.string.hs_permission_rationale_external_storage);
                 finish();
             }
         }

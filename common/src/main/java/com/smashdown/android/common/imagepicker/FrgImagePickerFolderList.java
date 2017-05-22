@@ -18,7 +18,6 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.smashdown.android.common.R;
-import com.smashdown.android.common.app.HSApp;
 import com.smashdown.android.common.imagepicker.event.HSEventImageFolderSelected;
 import com.smashdown.android.common.imagepicker.model.HSImageFolderItem;
 import com.smashdown.android.common.imagepicker.util.MediaStoreImageUtil;
@@ -163,7 +162,6 @@ public class FrgImagePickerFolderList extends HSBaseFragment {
             Glide.with(getActivity()).load(new File(folder.lastData)).centerCrop().listener(new RequestListener<File, GlideDrawable>() {
                 @Override
                 public boolean onException(Exception e, File model, Target<GlideDrawable> target, boolean isFirstResource) {
-                    Log.d(HSApp.LOG_TAG, "failed image model=" + model);
                     e.printStackTrace();
 
                     return false;

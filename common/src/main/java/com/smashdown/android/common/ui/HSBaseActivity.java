@@ -20,8 +20,6 @@ import com.smashdown.android.common.event.HSEventNetworkDisconnected;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.ButterKnife;
-
 public abstract class HSBaseActivity extends AppCompatActivity {
     public enum HSTransitionDirection {
         NONE, FROM_RIGHT_TO_LEFT, FROM_LEFT_TO_RIGHT, FROM_TOP_TO_BOTTOM, FROM_BOTTOM_TO_TOP
@@ -83,7 +81,6 @@ public abstract class HSBaseActivity extends AppCompatActivity {
 
         if (setupData(savedInstanceState)) {
             setContentView(getLayoutId());
-            ButterKnife.bind(this);
             setupUI(savedInstanceState);
 
             updateData();
